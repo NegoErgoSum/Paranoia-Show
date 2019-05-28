@@ -1528,7 +1528,6 @@ GameObject:
   - component: {fileID: 1483660496}
   - component: {fileID: 1483660495}
   - component: {fileID: 1483660494}
-  - component: {fileID: 1483660498}
   - component: {fileID: 1483660497}
   m_Layer: 0
   m_Name: Interlocutor2
@@ -1536,7 +1535,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1483660493
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1629,22 +1628,6 @@ MonoBehaviour:
   Dialogue:
   - sdf
   SpecialComponentName: 
---- !u!114 &1483660498
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1483660492}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18ef49f89e94ad94c9cf40a1aaf24a37, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  NpcType: 
-  Npc: {fileID: 0}
-  ShowmanItem: {fileID: 21300000, guid: 755f828ab57e2fc41b17b67cd834a64e, type: 3}
-  CurrentNpc: 0
 --- !u!1 &1671335608
 GameObject:
   m_ObjectHideFlags: 0
@@ -1921,7 +1904,6 @@ GameObject:
   - component: {fileID: 1786101240}
   - component: {fileID: 1786101243}
   - component: {fileID: 1786101242}
-  - component: {fileID: 1786101245}
   - component: {fileID: 1786101244}
   - component: {fileID: 1786101241}
   m_Layer: 0
@@ -1930,7 +1912,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1786101240
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2024,22 +2006,6 @@ MonoBehaviour:
   - lojkmo
   - gjkhfg
   SpecialComponentName: 
---- !u!114 &1786101245
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1786101239}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18ef49f89e94ad94c9cf40a1aaf24a37, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  NpcType: 
-  Npc: {fileID: 0}
-  ShowmanItem: {fileID: 21300000, guid: 755f828ab57e2fc41b17b67cd834a64e, type: 3}
-  CurrentNpc: 0
 --- !u!1 &1788345216
 GameObject:
   m_ObjectHideFlags: 0
@@ -2237,7 +2203,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 755f828ab57e2fc41b17b67cd834a64e, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

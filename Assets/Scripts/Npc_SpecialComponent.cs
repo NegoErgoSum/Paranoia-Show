@@ -6,8 +6,8 @@ using UnityEngine.UI;
 public class Npc_SpecialComponent : MonoBehaviour
 {
     public string NpcType;
-    public NpcController Npc;
-    public Sprite ShowmanItem;
+    public Sprite NpcItem;
+    NpcController BasicController;
 
 
 
@@ -26,7 +26,7 @@ public class Npc_SpecialComponent : MonoBehaviour
 
     void Start()
     {
-        Npc = gameObject.GetComponent<NpcController>();
+        BasicController = gameObject.GetComponent<NpcController>();
         NpcType = gameObject.GetComponent<NpcController>().NpcType;
         //SwitchType(NpcType);
 
@@ -70,8 +70,8 @@ public class Npc_SpecialComponent : MonoBehaviour
         {
             return;
         }
-        Npc.Anim = gameObject.GetComponent<Animator>();
-        Npc.Anim.SetBool("CanTalk", true);
-        Npc.StartCoroutine(Npc.TalkDialogue(Npc.Dialogue));
+        BasicController.Anim = gameObject.GetComponent<Animator>();
+        BasicController.Anim.SetBool("CanTalk", true);
+        BasicController.StartCoroutine(BasicController.TalkDialogue(BasicController.Dialogue));
     }
 }

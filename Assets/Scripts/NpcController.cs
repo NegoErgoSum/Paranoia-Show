@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class NpcController : MonoBehaviour
 {
-
+    
     private Animator _Anim;
     private string _Type;
     private Sprite _NpcSprite;
@@ -52,10 +52,8 @@ public class NpcController : MonoBehaviour
     }
 
     void Start()
-    {             
-        if (SpecialComponent!=null)
-        {
-        }
+    {
+        
         Anim = gameObject.GetComponent<Animator>();
 
         NpcSprite = gameObject.GetComponent<Image>().sprite;
@@ -66,7 +64,8 @@ public class NpcController : MonoBehaviour
         TextBox = GameObject.Find("Brain").GetComponent<Manager>().TextBoxRef;
         TextFramework = GameObject.Find("Brain").GetComponent<Manager>().TextFrameworkRef;
         LightBox = GameObject.Find("Brain").GetComponent<Manager>().TextFrameWorkSpritesRef;
-        
+        Npc_SpecialComponent specialComponent= gameObject.AddComponent<Npc_SpecialComponent>();
+        gameObject.SetActive(false);        
     }
     public void Refresh(Person npc, int interlocutor)
     {
@@ -78,7 +77,9 @@ public class NpcController : MonoBehaviour
         gameObject.GetComponent<Animator>().runtimeAnimatorController = npc.Appearance.GetComponent<Animator>().runtimeAnimatorController;
         
         gameObject.GetComponent<Npc_SpecialComponent>().SwitchType(this.NpcType);
-      
+        //gameObject.GetComponent<Npc_SpecialComponent>().NpcItem=
+
+
 
     }
 
