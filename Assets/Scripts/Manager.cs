@@ -5,8 +5,8 @@ using UnityEngine.UI;
 using Cinemachine;
 
 public class Manager : MonoBehaviour
-{   
-
+{
+  
 
     [Header("Cameras")]
     public GameObject[] Cams;
@@ -20,6 +20,8 @@ public class Manager : MonoBehaviour
     public GameObject TextFrameworkRef;
     public GameObject TextBoxRef;
     public Sprite[] TextFrameWorkSpritesRef;
+    public Vector3 GameOverPos;
+    private GameObject GameplayCam;
 
 
 
@@ -70,8 +72,8 @@ public class Manager : MonoBehaviour
 
     void Start()
     {
-        
-        CensusID = new int[0];
+        GameplayCam = GameObject.Find("GameplayCamera");
+    CensusID = new int[0];
         _Census = new List<Person>();
         //StartCoroutine(AddsLibrary(Adds)) ;
 
@@ -167,15 +169,18 @@ public class Manager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            SwapCamera(0);
+            SwapCamera(0, CinemachineBlendDefinition.Style.Cut);
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            SwapCamera(1);
+            SwapCamera(1, CinemachineBlendDefinition.Style.Cut);
         }
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            SwapCamera(2);
+            SwapCamera(2, CinemachineBlendDefinition.Style.Cut);
+        } if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            StartCoroutine(GameOver());
         }
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -211,7 +216,7 @@ public class Manager : MonoBehaviour
     {
         GameObject houseCandidate = Instantiate(house) as GameObject;
 
-        SwapCamera(1);           
+        SwapCamera(1, CinemachineBlendDefinition.Style.Cut);           
 
         StartCoroutine(HouseEntryStage(houseCandidate));
     }
@@ -257,9 +262,11 @@ public class Manager : MonoBehaviour
         }
         //character.transform.localPosition = new Vector3(0,0,-69);
     }
-    void SwapCamera(int shot)
+    void SwapCamera(int shot, CinemachineBlendDefinition.Style blend)
     {
-        foreach(GameObject cam in Cams)
+        GameObject.Find("Brain").GetComponent<CinemachineBrain>().m_DefaultBlend.m_Style = blend;
+
+        foreach (GameObject cam in Cams)
         {
             if (cam == Cams[shot])
             {
@@ -283,6 +290,16 @@ public class Manager : MonoBehaviour
         while (Mathf.Abs(house.transform.position.x-HouseOnStage.x)>float.Epsilon)
         {
             house.transform.position = Vector2.Lerp(house.transform.position, HouseOnStage, Time.deltaTime/HouseEntryTime);
+            yield return null;
+        }
+    }
+    IEnumerator GameOver()
+    {
+        float camDistance = Mathf.Abs(Vector3.Magnitude(GameplayCam.transform.position) - Vector3.Magnitude(GameOverPos));
+
+        while (camDistance > float.Epsilon)
+        {
+            camDistance = Mathf.Abs(Vector3.Magnitude(GameplayCam.transform.position) - Vector3.Magnitude(GameOverPos)); GameplayCam.transform.position = Vector3.Slerp(GameplayCam.transform.position, GameOverPos, Time.deltaTime*0.5f);
             yield return null;
         }
     }

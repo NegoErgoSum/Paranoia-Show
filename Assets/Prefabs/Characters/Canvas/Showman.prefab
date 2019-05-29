@@ -195,7 +195,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4495230598631963443}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8e6d4b8fe8cf858489d5ebfeaaf1db4d, type: 3}
   m_Name: 
@@ -216,7 +216,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4495230598631963443}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 89fd9b26093abe74d8dad3a53a9c99d3, type: 3}
   m_Name: 
@@ -228,12 +228,11 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4495230598631963443}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 18ef49f89e94ad94c9cf40a1aaf24a37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   NpcType: 
-  Npc: {fileID: 0}
-  ShowmanItem: {fileID: 0}
+  NpcItem: {fileID: 0}
   CurrentNpc: 0
