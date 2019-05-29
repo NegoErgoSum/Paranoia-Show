@@ -645,7 +645,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.1
-  far clip plane: 5000
+  far clip plane: 100
   field of view: 40
   orthographic: 1
   orthographic size: 10
@@ -726,6 +726,8 @@ MonoBehaviour:
   CharacterCase:
   - {fileID: 4495230598631963443, guid: aec6c8e8ceeca674eb4428f2d71b56a0, type: 3}
   - {fileID: 2075851725406848279, guid: f7eb03ccde21e484a9a27835746c739e, type: 3}
+  - {fileID: 189310461682449083, guid: 4f6b6194fb31a7647bb0fd55447ea762, type: 3}
+  - {fileID: 5114758032235953891, guid: 3a0a75ef9a821184fb2bd23e9fc3b31a, type: 3}
   AvailableNames:
   - Batu
   - Golazo
@@ -1487,7 +1489,7 @@ MonoBehaviour:
     FieldOfView: 40
     OrthographicSize: 6
     NearClipPlane: 0.1
-    FarClipPlane: 5000
+    FarClipPlane: 100
     Dutch: 0
   m_ComponentOwner: {fileID: 901744710}
 --- !u!4 &1089104133
@@ -1545,7 +1547,7 @@ MonoBehaviour:
     FieldOfView: 40
     OrthographicSize: 10
     NearClipPlane: 0.1
-    FarClipPlane: 5000
+    FarClipPlane: 100
     Dutch: 0
   m_ComponentOwner: {fileID: 776893799}
 --- !u!4 &1170883364
@@ -2266,7 +2268,7 @@ MonoBehaviour:
     FieldOfView: 40
     OrthographicSize: 6
     NearClipPlane: 0.1
-    FarClipPlane: 5000
+    FarClipPlane: 100
     Dutch: 0
   m_ComponentOwner: {fileID: 1720817268}
 --- !u!4 &1745755089
@@ -2414,7 +2416,7 @@ Animator:
   m_GameObject: {fileID: 1786101239}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 313a0e05886fe5044bc147a319b43f20, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

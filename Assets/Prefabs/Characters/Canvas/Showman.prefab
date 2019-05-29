@@ -86,10 +86,6 @@ GameObject:
   - component: {fileID: 4495230598631963439}
   - component: {fileID: 4495230598631963440}
   - component: {fileID: 4495230598631963441}
-  - component: {fileID: 7260969710760533988}
-  - component: {fileID: 4495230598631963438}
-  - component: {fileID: 114558479436822238}
-  - component: {fileID: 114026092626702376}
   m_Layer: 5
   m_Name: Showman
   m_TagString: Untagged
@@ -173,66 +169,3 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &7260969710760533988
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4495230598631963443}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f2a4a8a56c59e54180093cb36c18cb4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TalkingDelay: 0.05
-  Dialogue: []
-  SpecialComponentName: 
---- !u!114 &4495230598631963438
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4495230598631963443}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e6d4b8fe8cf858489d5ebfeaaf1db4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DialogueS:
-  - "Buenos d\xEDas queridos compa\xF1eros en el zafarrancho de la vida!"
-  - 'Hoy tenemos noticias frescas:'
-  - "- Seg\xFAn lo acordado el domingo, la reuni\xF3n de Narrativa hoy llevar\xE1
-    a cabo a las 16:00"
-  - "- Me estoy fumando un porrito con el caf\xE9 y creo que he dado con la clave
-    de un buen desayuno"
-  - "- Y por \xFAltimo, hoy tenemos a un invitado especial, que nos va a explicar
-    en qu\xE9 est\xE1 trabajando: Golazo!"
---- !u!114 &114558479436822238
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4495230598631963443}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89fd9b26093abe74d8dad3a53a9c99d3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &114026092626702376
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4495230598631963443}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18ef49f89e94ad94c9cf40a1aaf24a37, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  NpcType: 
-  NpcItem: {fileID: 0}
-  CurrentNpc: 0

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class NpcController : MonoBehaviour
 {
-    
+    public Person Identificator;
     private Animator _Anim;
     private string _Type;
     private Sprite _NpcSprite;

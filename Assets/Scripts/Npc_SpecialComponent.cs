@@ -64,7 +64,7 @@ public class Npc_SpecialComponent : MonoBehaviour
                 }
         }
     }
-    public void MicUp()
+    public void FirstDialogue()
     {
         if (CurrentNpc!= Character.SHOWMAN)
         {
