@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Contestant_Ray
+  m_Controller: {fileID: 9100000, guid: 313a0e05886fe5044bc147a319b43f20, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 0d7cf5aebb74a4d43b8e7f088d420a6c, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: ac184428d753086409d865231285727f, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 3b9b136478d780f49a535115fb6d6307, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 8184539ce1ed02149938ebb9b0ce3716, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 1ccc1bff54e479c439e6831e0a78f51a, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 551db32c3b431bb4ca5b1e3bbf757f36, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: c0299475f16252f41932385294174991, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 98b7cf8da6095bc48aa81861860e7c49, type: 2}

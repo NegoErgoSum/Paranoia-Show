@@ -77,7 +77,8 @@ public class Person
         this.Name = name;
         this.BirthYear = birthYear;
         Appearance = GameObject.Instantiate(Appearance) as GameObject;
-        Appearance.AddComponent<CharacterManager>();
+        Appearance.AddComponent<NpcController>();
+        Appearance.GetComponent<NpcController>().Identificator = this;
         Debug.Log("Name:" + this.Name + ";Year:" + BirthYear);
 
     }
@@ -93,8 +94,7 @@ public class Person
         this.BirthYear = birthYear;
         Appearance = GameObject.Instantiate(Appearance) as GameObject;
         Appearance.transform.localPosition = pos;
-        Appearance.AddComponent<CharacterManager>();
-        Debug.Log("Name:" + this.Name + ";Year:" + BirthYear);
+        Appearance.AddComponent<NpcController>();
         Appearance.GetComponent<NpcController>().NpcType = this.Type;
         Appearance.AddComponent<Npc_SpecialComponent>();
         Appearance.SetActive(false);

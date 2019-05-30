@@ -8,4 +8,12 @@ AnimatorOverrideController:
   m_PrefabAsset: {fileID: 0}
   m_Name: Contestant_Golazo
   m_Controller: {fileID: 9100000, guid: 313a0e05886fe5044bc147a319b43f20, type: 2}
-  m_Clips: []
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 0d7cf5aebb74a4d43b8e7f088d420a6c, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 0d7cf5aebb74a4d43b8e7f088d420a6c, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 3b9b136478d780f49a535115fb6d6307, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 3b9b136478d780f49a535115fb6d6307, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 1ccc1bff54e479c439e6831e0a78f51a, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 1ccc1bff54e479c439e6831e0a78f51a, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: c0299475f16252f41932385294174991, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: c0299475f16252f41932385294174991, type: 2}
