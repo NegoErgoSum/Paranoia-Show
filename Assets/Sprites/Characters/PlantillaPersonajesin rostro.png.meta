@@ -1,7 +1,20 @@
 fileFormatVersion: 2
 guid: c7ad045f72367fc448f85d6b47aad76b
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: PlantillaPersonajesin rostro_0
+    21300002: PlantillaPersonajesin rostro_1
+    21300004: PlantillaPersonajesin rostro_2
+    21300006: PlantillaPersonajesin rostro_3
+    21300008: PlantillaPersonajesin rostro_4
+    21300010: PlantillaPersonajesin rostro_5
+    21300012: PlantillaPersonajesin rostro_6
+    21300014: PlantillaPersonajesin rostro_7
+    21300016: PlantillaPersonajesin rostro_8
+    21300018: PlantillaPersonajesin rostro_9
+    21300020: PlantillaPersonajesin rostro_10
+    21300022: PlantillaPersonajesin rostro_11
+    21300024: PlantillaPersonajesin rostro_12
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -40,7 +53,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -82,11 +95,271 @@ TextureImporter:
     androidETC2FallbackOverride: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: PlantillaPersonajesin rostro_0
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 169
+        width: 52
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 552159bde96bb864ea2f1ed14e062f9c
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlantillaPersonajesin rostro_1
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 169
+        width: 52
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1d3948ac7980c1b4a9aa0ca2fcb69ee5
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlantillaPersonajesin rostro_2
+      rect:
+        serializedVersion: 2
+        x: 135
+        y: 169
+        width: 52
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1b06834c9893e864aaad2e7646812afd
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlantillaPersonajesin rostro_3
+      rect:
+        serializedVersion: 2
+        x: 197
+        y: 169
+        width: 52
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3b5f5323728f4dc4ca3ec0836e7649ee
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlantillaPersonajesin rostro_4
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 100
+        width: 52
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a411a801c905dfe48a8a8044d881d715
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlantillaPersonajesin rostro_5
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 100
+        width: 52
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a838fea2c7cb1344cb7bce0f3706dfff
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlantillaPersonajesin rostro_6
+      rect:
+        serializedVersion: 2
+        x: 135
+        y: 100
+        width: 52
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 23ea395df23971147879e19f77bc6908
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlantillaPersonajesin rostro_7
+      rect:
+        serializedVersion: 2
+        x: 197
+        y: 100
+        width: 52
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8229e5e912b515c44ac03566344593eb
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlantillaPersonajesin rostro_8
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 27
+        width: 52
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0e3996666ef9b0a44870c5db229d9692
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlantillaPersonajesin rostro_9
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 27
+        width: 52
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: db275b1a867c35a45b3f15baead37a37
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlantillaPersonajesin rostro_10
+      rect:
+        serializedVersion: 2
+        x: 135
+        y: 27
+        width: 52
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7d4c2e9ee5812fa4891b9335c19150a1
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlantillaPersonajesin rostro_11
+      rect:
+        serializedVersion: 2
+        x: 197
+        y: 27
+        width: 52
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7520c716c3f3d7e44b4d93ee5962bf2c
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlantillaPersonajesin rostro_12
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 5
+        width: 7
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aafa6192d7a329d4e9d7cc2b4ba21488
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: b89985298114f6347b98045a8825126f
     vertices: []
     indices: 
     edges: []

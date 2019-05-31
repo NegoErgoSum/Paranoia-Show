@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 4495230598631963441}
   m_Layer: 5
   m_Name: Showman
-  m_TagString: Untagged
+  m_TagString: Showman
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

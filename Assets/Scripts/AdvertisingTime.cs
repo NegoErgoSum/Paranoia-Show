@@ -100,7 +100,9 @@ public class AdvertisingTime
                 yield return monobehaviour.StartCoroutine(PlayAdd(add, fade, timeShowingAdd));
             }
             AddBackground.SetActive(false);
-            Curtain.GetComponent<Animator>().SetTrigger("PlayCurtain");
+        
+        GameObject.Find("Brain").GetComponent<Manager>().Spotlights.SetActive(true);
+        GameObject.Find("Brain").GetComponent<Manager>().Spotlights.GetComponent<SpotLightController>().ShowPresentation();
 
         }     //library of adds to play
         IEnumerator PlayAdd(GameObject add, float playAddDelay, float timeShowingAdd)

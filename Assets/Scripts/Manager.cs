@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
 using Cinemachine;
 
 public class Manager : MonoBehaviour
@@ -15,6 +16,7 @@ public class Manager : MonoBehaviour
     public Vector3[] OverlapShotScale;
     public static GameObject CurrentCam;
     public GameObject Interlocutor1, Interlocutor2;
+    public GameObject Spotlights;
 
     [Header ("HUD")]
     public GameObject TextFrameworkRef;
@@ -40,9 +42,21 @@ public class Manager : MonoBehaviour
     public static int IDAssign;
     public GameObject TextBoxCanvas;
     public GameObject[] SpecialInterlocutorsComponent;
-    
 
 
+    [Header("AudioSettings")]
+    public AudioClip Sounds;
+    public AudioSource SpotLightAudiosource;
+
+    public AudioSource NewAudiosource(AudioClip audioClip, bool awake, bool loop)
+    {
+        AudioSource newAudio = gameObject.AddComponent<AudioSource>();
+        newAudio.clip = audioClip;
+        newAudio.playOnAwake = awake;
+        newAudio.loop = loop;
+
+        return newAudio;
+    }
 
     public List<Person> Census
     {
@@ -56,8 +70,9 @@ public class Manager : MonoBehaviour
         }
 
     }
-
     public GameObject[] CharacterCase;
+    private List<GameObject> LevelCandidates;
+    private List <GameObject> AvailableCandidates;
     public string[] AvailableNames;
 
     [Header("Adds")]
@@ -72,14 +87,23 @@ public class Manager : MonoBehaviour
 
     void Start()
     {
+
+        SpotLightAudiosource = NewAudiosource(Sounds, false, false);
+
+        Spotlights.SetActive(false);
+        //StartCoroutine(GameOver());
+
+        LevelCandidates = new List<GameObject>();
+        LevelCandidates = CharacterCase.OfType<GameObject>().ToList();
+        AvailableCandidates = new List<GameObject>();
         GameplayCam = GameObject.Find("GameplayCamera");
     CensusID = new int[0];
         _Census = new List<Person>();
         //StartCoroutine(AddsLibrary(Adds)) ;
 
-        //AdvertisingTime pack = new AdvertisingTime(Adds, 2, 2);
+        AdvertisingTime pack = new AdvertisingTime(Adds, 2, 2);
 
-        //GoToAdvertising(pack);
+        GoToAdvertising(pack);
 
 
     }
@@ -116,13 +140,18 @@ public class Manager : MonoBehaviour
     }
     void Update()
     {
+
         UpdateCensus();
-        if (Input.GetKey(KeyCode.C)                         )
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            StartCoroutine(GameOver());
+        }
+        if (Input.GetKey(KeyCode.C))
+        {
+            if (Input.GetKey(KeyCode.Backspace))
             {
-            if (Input.GetKey(KeyCode.Backspace)      )
+                if (Input.GetKey(KeyCode.Alpha1))
                 {
-                if (Input.GetKey(KeyCode.Alpha1)  )
-                    {
                     Interlocutor1.GetComponent<NpcController>().Reset();
 
                 }
@@ -137,74 +166,114 @@ public class Manager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.M))
         {
             Interlocutor1.GetComponentInChildren<NpcController>().Talk(Interlocutor1.GetComponentInChildren<NpcController>().Dialogue);
-            
 
-        }       if (Input.GetKeyDown(KeyCode.N))
+
+        }
+        if (Input.GetKeyDown(KeyCode.N))
         {
             Interlocutor2.GetComponentInChildren<NpcController>().Talk(Interlocutor2.GetComponentInChildren<NpcController>().Dialogue);
             Interlocutor2.GetComponentInChildren<AudioSource>().Play();
             Interlocutor2.GetComponentInChildren<Animator>().SetBool("Talk", true);
 
         }
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.I))
         {
-            NpcToFirstPlane(_Census[0]);
+            NpcToFirstPlane(_Census[0], false);
         }
         if (Input.GetKeyDown(KeyCode.G))
         {
-            NpcToFirstPlane(_Census[1]);
+            NpcToFirstPlane(_Census[1], false);
         }
         if (Input.GetKeyDown(KeyCode.C))
         {
-            if(OverlapShot.activeSelf)
+            if (OverlapShot.activeSelf)
             {
-                               OverlapCurrentShot(false) ;
+                OverlapCurrentShot(false);
 
             }
             else if (!OverlapShot.activeSelf)
             {
-                               OverlapCurrentShot(true) ;
+                OverlapCurrentShot(true);
 
             }
         }
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (Input.GetKey(KeyCode.C))
+        {
+              if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             SwapCamera(0, CinemachineBlendDefinition.Style.Cut);
         }
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            SwapCamera(1, CinemachineBlendDefinition.Style.Cut);
         }
-        if (Input.GetKeyDown(KeyCode.Alpha3))
+      
+        if (Input.GetKey(KeyCode.F))
         {
-            SwapCamera(2, CinemachineBlendDefinition.Style.Cut);
-        } if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            StartCoroutine(GameOver());
+            {
+                if (Input.GetKeyDown(KeyCode.Alpha0))
+                {
+
+                    EnterShowman(false);
+                }
+                if (Input.GetKeyDown(KeyCode.Alpha1))
+                {
+
+                    StartCoroutine( InstantiateCandidates(3));                }
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                SwapCamera(1, CinemachineBlendDefinition.Style.Cut);
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha3))
+            {
+                SwapCamera(2, CinemachineBlendDefinition.Style.Cut);
+            }
+           
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                EntryOnStage(Houses[0]);
+            }
+           
+            if (Input.GetKeyDown(KeyCode.E) && _Census.Capacity > 0)
+            {
+
+                Destroy(_Census[0].Appearance.gameObject);
+                _Census.RemoveAt(0);
+                _Census.Capacity = (_Census.Capacity < 0) ? 0 : _Census.Capacity - 1;
+            }
         }
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            EntryOnStage(Houses[0]);
-        }
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            int random = Random.Range(0, CharacterCase.Length);
-            CreateCharacter(CharacterCase[random], AvailableNames[Random.Range(0, AvailableNames.Length)], Random.Range(1990,2001), new Vector2(10,-0.3f), CharacterCase[random].name);
-        }
-        if (Input.GetKeyDown(KeyCode.E)&&_Census.Capacity>0)
-        {
-            Destroy(_Census[0].Appearance.gameObject);
-            _Census.RemoveAt(0);
-            _Census.Capacity = (_Census.Capacity<0)?0:_Census.Capacity-1;
-        }           
     }
 
+     IEnumerator CheckingPoblation(int id)
+    {
+        foreach (Person d in Census)
+            {
+            if(d.ID== id)
+            {
 
+            }
+            yield return null;
+        }
+    }
 
 
     public void CreateCharacter(GameObject characterCase, string name, int year, Vector3 spawnPos, string type)
     {
-        Census.Add(new Person(characterCase, name, year, spawnPos,type));
+        //character.Appearance.GetComponent<NpcController>().Identificator = new Person(characterCase, name, year, spawnPos, type);
+        GameObject citizen = Instantiate(characterCase) as GameObject;
+        citizen.transform.localPosition = spawnPos;
+        citizen.AddComponent<NpcController>();
+        citizen.GetComponent<NpcController>().Identificator = new Person(characterCase, name, year); 
+        citizen.AddComponent<Npc_SpecialComponent>();
+        citizen.GetComponent<NpcController>().ShowPapers();
+
+      citizen.SetActive(false);
+
+
+        if (citizen.GetComponent<NpcController>().Identificator.Type=="Showman")
+        {
+            Showman = citizen.gameObject;
+            return;
+        }
+                 Census.Add(citizen.GetComponent<NpcController>().Identificator);
 
     }
 
@@ -225,7 +294,7 @@ public class Manager : MonoBehaviour
     {
 
     }
-    public void NpcToFirstPlane(Person npc)
+    public void NpcToFirstPlane(Person npc, bool shadow)
     {
 
         TextBoxCanvas.SetActive(true);
@@ -238,26 +307,27 @@ public class Manager : MonoBehaviour
                 if (Interlocutor1.GetComponent<NpcController>().NpcType=="Showman")
                 {
                     Interlocutor2.SetActive(true);
-                    Interlocutor2.GetComponent<NpcController>().Refresh(npc, 0);
+                    Interlocutor2.GetComponent<NpcController>().Refresh(npc, 0, shadow);
                 }
                 else
                 {
 
                     Interlocutor1.SetActive(true);
-                    Interlocutor1.GetComponent<NpcController>().Refresh(npc, 0);
+                    Interlocutor1.GetComponent<NpcController>().Refresh(npc, 0, shadow);
                 }
             }
             else
             {
               Interlocutor2.SetActive(true);
-            Interlocutor2.GetComponent<NpcController>().Refresh(npc, 1);
+            Interlocutor2.GetComponent<NpcController>().Refresh(npc, 1, shadow);
             }  
         }
         else
         {
+            
 
             Interlocutor1.SetActive(true);
-            Interlocutor1.GetComponent<NpcController>().Refresh(npc, 0);
+            Interlocutor1.GetComponent<NpcController>().Refresh(npc, 0, shadow);
 
         }
         //character.transform.localPosition = new Vector3(0,0,-69);
@@ -281,6 +351,43 @@ public class Manager : MonoBehaviour
 
 
     }
+    public void FormalizePerson()
+    {
+
+    }
+    public void ShowmanSignIn()
+    {
+            CreateCharacter(Showman, "Mr.Bug", 2000, new Vector2(10, -0.3f), Showman.name);
+        //Showman = GameObject.FindGameObjectWithTag("Showman");
+
+    }
+    void Presentation()
+    {
+        EnterShowman(false);
+        Interlocutor1.GetComponent<NpcController>().Dialogue[0] = "Buenas tardes, soy Adrián Peláez y estás viendo una nemotécnica que he empezado a desarrollar este verano";
+    }
+    public void EnterShowman(bool shadow)
+    {
+        if (Interlocutor1.GetComponent<Animator>().runtimeAnimatorController!=null)
+        {
+                                  Interlocutor1.GetComponent<NpcController>().Reset();
+
+        }
+        if (shadow)
+        {
+            Invoke("Presentation", 2);
+        }
+       if(shadow==false)
+        {
+            Curtain.GetComponent<Animator>().SetTrigger("PlayCurtain");
+            Spotlights.SetActive(false);
+            SpotLightAudiosource.Play();
+            StartCoroutine(InstantiateCandidates(3));
+
+        }
+        NpcToFirstPlane(Showman.GetComponent<NpcController>().Identificator, shadow);
+        //Interlocutor1.GetComponent<Animator>().SetBool("Shadow", true);
+    }
     IEnumerator HouseEntryStage(GameObject house)
     {
         Vector3 pos = house.transform.position;
@@ -295,12 +402,60 @@ public class Manager : MonoBehaviour
     }
     IEnumerator GameOver()
     {
-        float camDistance = Mathf.Abs(Vector3.Magnitude(GameplayCam.transform.position) - Vector3.Magnitude(GameOverPos));
 
-        while (camDistance > float.Epsilon)
+
+        while (Vector3.Distance(GameplayCam.transform.position, GameOverPos) > float.Epsilon)
         {
-            camDistance = Mathf.Abs(Vector3.Magnitude(GameplayCam.transform.position) - Vector3.Magnitude(GameOverPos)); GameplayCam.transform.position = Vector3.Slerp(GameplayCam.transform.position, GameOverPos, Time.deltaTime*0.5f);
+            GameplayCam.transform.position = Vector3.Slerp(GameplayCam.transform.position, GameOverPos, Time.deltaTime*0.5f);
+
             yield return null;
+
         }
+
     }
+
+   IEnumerator InstantiateCandidates(int number)
+    {
+        Debug.Log("hellow");
+
+        AvailableCandidates.Clear();
+        AvailableCandidates = CharacterCase.OfType<GameObject>().ToList();
+
+        for (int i =1; i<=number; i++)
+        {               
+            int random = Random.Range(0, AvailableCandidates.Count);
+            yield return StartCoroutine(CheckCandidateRepeated(AvailableCandidates[random]));
+
+        }
+
+    }
+    IEnumerator CheckCandidateRepeated(GameObject candidate)
+    {
+
+        bool complete = false;
+
+        foreach (GameObject person in AvailableCandidates)
+        {
+            if (!complete)
+            {
+               if (person.name == candidate.name)
+                {
+                    CreateCharacter(candidate, AvailableNames[Random.Range(0, AvailableNames.Length)], Random.Range(1990, 2001), new Vector2(10, -0.3f), candidate.name);
+
+                    complete = true;
+
+                yield return null;
+                }
+                //AvailableCandidates.Add(candidate);
+                //complete = true;
+
+            }
+
+        }
+                               AvailableCandidates.Remove(candidate);
+                           yield return null;
+
+        }
+       
+
 }

@@ -26,7 +26,6 @@ public class NpcController : MonoBehaviour
 
     public Sprite NpcSprite { get; set; }
 
-
     public string SpecialComponentName;
     public Animator Anim
     {
@@ -51,9 +50,18 @@ public class NpcController : MonoBehaviour
         }
     }
 
+    void Update()
+    {
+    }
+    public void ShowPapers()
+    {
+        Debug.Log("Name: " + Identificator.Name + "; Birthyear: " + Identificator.BirthYear);
+        Debug.Log("Type: " + Identificator.Type);
+
+    }
     void Start()
     {
-        
+
         Anim = gameObject.GetComponent<Animator>();
 
         NpcSprite = gameObject.GetComponent<Image>().sprite;
@@ -65,16 +73,18 @@ public class NpcController : MonoBehaviour
         TextFramework = GameObject.Find("Brain").GetComponent<Manager>().TextFrameworkRef;
         LightBox = GameObject.Find("Brain").GetComponent<Manager>().TextFrameWorkSpritesRef;
         Npc_SpecialComponent specialComponent= gameObject.AddComponent<Npc_SpecialComponent>();
+        //Debug.Log(Identificator.Name);
         gameObject.SetActive(false);        
     }
-    public void Refresh(Person npc, int interlocutor)
-    {
-        NpcSprite = npc.Appearance.GetComponent<Image>().sprite;
+    public void Refresh(Person npc, int interlocutor, bool shadow)
+    {              gameObject.GetComponent<Animator>().runtimeAnimatorController = npc.Appearance.GetComponent<Animator>().runtimeAnimatorController;
+
+        gameObject.GetComponent<Animator>().SetBool("Shadow", shadow);
+NpcSprite = npc.Appearance.GetComponent<Image>().sprite;
         NpcType = npc.Type;
 
         GameObject.Find("Brain").GetComponent<Manager>().SpecialInterlocutorsComponent[interlocutor].gameObject.name = "Item";
 
-        gameObject.GetComponent<Animator>().runtimeAnimatorController = npc.Appearance.GetComponent<Animator>().runtimeAnimatorController;
         
         gameObject.GetComponent<Npc_SpecialComponent>().SwitchType(this.NpcType);
         //gameObject.GetComponent<Npc_SpecialComponent>().NpcItem=

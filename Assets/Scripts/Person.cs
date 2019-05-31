@@ -68,36 +68,36 @@ public class Person
         Manager.IDAssign++;
 
     }
-    public Person(GameObject personPrefab, string name, int birthYear)
-   {
-        ID = Manager.IDAssign;
-        Manager.IDAssign++;
+   // public Person(GameObject personPrefab, string name, int birthYear)
+   //{
+   //     ID = Manager.IDAssign;
+   //     Manager.IDAssign++;
 
-        this.Appearance = personPrefab;
-        this.Name = name;
-        this.BirthYear = birthYear;
-        Appearance = GameObject.Instantiate(Appearance) as GameObject;
-        Appearance.AddComponent<NpcController>();
-        Appearance.GetComponent<NpcController>().Identificator = this;
-        Debug.Log("Name:" + this.Name + ";Year:" + BirthYear);
+   //     this.Appearance = personPrefab;
+   //     this.Name = name;
+   //     this.BirthYear = birthYear;
+   //     Appearance = GameObject.Instantiate(Appearance) as GameObject;
+   //     Appearance.AddComponent<NpcController>();
+   //     Appearance.GetComponent<NpcController>().Identificator = this;
+   //     Debug.Log("Name:" + this.Name + ";Year:" + BirthYear);
+
+   // }
+    public Person(GameObject person, Person identity)
+   {
+        person.GetComponent<NpcController>().Identificator = identity;
 
     }
-    public Person(GameObject personPrefab, string name, int birthYear,Vector3 pos, string type)
+    public Person(GameObject personPrefab, string name, int birthYear)
     {
         ID = Manager.IDAssign;
         Manager.IDAssign++;
 
-        Type = type;
+        Type = personPrefab.name;
 
         this.Appearance = personPrefab;
         this.Name = name;
         this.BirthYear = birthYear;
-        Appearance = GameObject.Instantiate(Appearance) as GameObject;
-        Appearance.transform.localPosition = pos;
-        Appearance.AddComponent<NpcController>();
-        Appearance.GetComponent<NpcController>().NpcType = this.Type;
-        Appearance.AddComponent<Npc_SpecialComponent>();
-        Appearance.SetActive(false);
+       
 
     }
 
