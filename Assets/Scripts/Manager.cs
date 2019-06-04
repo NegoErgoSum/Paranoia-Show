@@ -1,9 +1,11 @@
-﻿using System.Collections;
+﻿//using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
 using Cinemachine;
+
 
 public class Manager : MonoBehaviour
 {
@@ -48,6 +50,18 @@ public class Manager : MonoBehaviour
     public AudioClip Sounds;
     public AudioSource SpotLightAudiosource;
 
+    [TextArea]
+    public string[] FirstDialogue;
+
+    public enum ShowStatus
+    {
+        ADVERTISING, PRESENTATION, SHOW
+    };
+    
+
+    public ShowStatus ShowPhase;
+
+   
     public AudioSource NewAudiosource(AudioClip audioClip, bool awake, bool loop)
     {
         AudioSource newAudio = gameObject.AddComponent<AudioSource>();
@@ -101,16 +115,14 @@ public class Manager : MonoBehaviour
         _Census = new List<Person>();
         //StartCoroutine(AddsLibrary(Adds)) ;
 
-        AdvertisingTime pack = new AdvertisingTime(Adds, 2, 2);
-
-        GoToAdvertising(pack);
+        
 
 
     }
 
     
 
-    void OverlapCurrentShot(bool overlap)
+    public void OverlapCurrentShot(bool overlap)
     {
 
         if(!overlap)
@@ -118,15 +130,24 @@ public class Manager : MonoBehaviour
             OverlapShot.SetActive(false);
             return;
         }
-      for(int i=0; i<Cams.Length;i++)
+        UpdateOverlap();
+        OverlapShot.SetActive(true);
+    }
+    void UpdateOverlap()
+    {
+        if (ShowPhase!= ShowStatus.SHOW)
         {
-          if(Cams[i]==CurrentCam)
+            OverlapShot.SetActive(false);
+            return;
+        }
+        for (int i = 0; i < Cams.Length; i++)
+        {
+            if (Cams[i] == CurrentCam)
             {
                 OverlapShot.transform.position = OverlapShotCoord[i];
                 OverlapShot.transform.localScale = OverlapShotScale[i];
             }
         }
-        OverlapShot.SetActive(true);
     }
     void UpdateCensus ()
     {
@@ -140,12 +161,11 @@ public class Manager : MonoBehaviour
     }
     void Update()
     {
-
+        Debug.Log(ShowPhase);
         UpdateCensus();
-        if (Input.GetKeyDown(KeyCode.LeftShift))
-        {
-            StartCoroutine(GameOver());
-        }
+        UpdateOverlap();
+
+
         if (Input.GetKey(KeyCode.C))
         {
             if (Input.GetKey(KeyCode.Backspace))
@@ -184,19 +204,7 @@ public class Manager : MonoBehaviour
         {
             NpcToFirstPlane(_Census[1], false);
         }
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            if (OverlapShot.activeSelf)
-            {
-                OverlapCurrentShot(false);
-
-            }
-            else if (!OverlapShot.activeSelf)
-            {
-                OverlapCurrentShot(true);
-
-            }
-        }
+        
         if (Input.GetKey(KeyCode.C))
         {
               if (Input.GetKeyDown(KeyCode.Alpha1))
@@ -277,10 +285,18 @@ public class Manager : MonoBehaviour
 
     }
 
-    void GoToAdvertising(AdvertisingTime setUp)
+    public void GoToAdvertising(AdvertisingTime setUp)
     {
+        ShowPhase = ShowStatus.ADVERTISING;
         setUp.InitAddTime(this);
             }
+    public void EndOfAdvertising()
+    {
+        ShowPhase = ShowStatus.SHOW;
+    }
+
+
+
     void EntryOnStage(GameObject house)
     {
         GameObject houseCandidate = Instantiate(house) as GameObject;
@@ -332,7 +348,7 @@ public class Manager : MonoBehaviour
         }
         //character.transform.localPosition = new Vector3(0,0,-69);
     }
-    void SwapCamera(int shot, CinemachineBlendDefinition.Style blend)
+    public  void SwapCamera(int shot, CinemachineBlendDefinition.Style blend)
     {
         GameObject.Find("Brain").GetComponent<CinemachineBrain>().m_DefaultBlend.m_Style = blend;
 
@@ -342,13 +358,13 @@ public class Manager : MonoBehaviour
             {
                 cam.GetComponent<CinemachineVirtualCamera>().Priority = 2;
                 CurrentCam = cam;
+
             }
             else
             {
                 cam.GetComponent<CinemachineVirtualCamera>().Priority = 1;
             }
         }
-
 
     }
     public void FormalizePerson()
@@ -364,7 +380,14 @@ public class Manager : MonoBehaviour
     void Presentation()
     {
         EnterShowman(false);
-        Interlocutor1.GetComponent<NpcController>().Dialogue[0] = "Buenas tardes, soy Adrián Peláez y estás viendo una nemotécnica que he empezado a desarrollar este verano";
+        Interlocutor1.GetComponent<NpcController>().Dialogue = new string[FirstDialogue.Length];
+        System.Array.Copy(FirstDialogue, Interlocutor1.GetComponent<NpcController>().Dialogue ,FirstDialogue.Length);
+        ResumeShow();
+
+    }
+    public void ResumeShow()
+    {
+        ShowPhase = ShowStatus.SHOW;
     }
     public void EnterShowman(bool shadow)
     {
@@ -400,7 +423,7 @@ public class Manager : MonoBehaviour
             yield return null;
         }
     }
-    IEnumerator GameOver()
+   public IEnumerator GameOver()
     {
 
 

@@ -70,6 +70,10 @@ public class SpotLightController : MonoBehaviour
         LimitMaxY = Coll.bounds.max.y;
         LimitMinX = Coll.bounds.min.x;
         LimitMinY = Coll.bounds.min.y;
+        LimitMaxX = LimitMaxX;
+        LimitMaxY = LimitMaxY;
+        LimitMinX = LimitMinX;
+        LimitMinY = LimitMinY;
     }
     private void LightFocus()
     {
@@ -99,7 +103,6 @@ public class SpotLightController : MonoBehaviour
 
         while (!Focus)
         {
-            time -= Time.deltaTime;
             Vector2 randomPoint = new Vector2(randomX, randomY);
             Spot1.transform.position = Vector2.Lerp(Spot1.transform.position, randomPoint, Time.deltaTime / time);
             Spot2.transform.position = Vector2.Lerp(Spot2.transform.position, -randomPoint, Time.deltaTime / time);
@@ -109,6 +112,8 @@ public class SpotLightController : MonoBehaviour
                 randomY = Random.Range(LimitMinY, LimitMaxY);
                 time = 1;
             }
+            time -= Time.deltaTime;
+
             yield return null;
         }
         GameObject.Find("Brain").GetComponent<Manager>().ShowmanSignIn();

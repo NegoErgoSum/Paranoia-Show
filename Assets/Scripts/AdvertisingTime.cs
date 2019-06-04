@@ -7,12 +7,14 @@ public class AdvertisingTime
 {        
     private float _TimeShowingAdd;
     private float _Fade;
+    private bool _FirstAdds;
     private GameObject[] _AddsLibrary;
 
     private GameObject AddBackground;
     private GameObject HUDAdd;
     private GameObject Curtain; 
 
+    public bool FirstAdds  { get; set; }    
     public float TimeShowingAdd
     {
         get
@@ -49,6 +51,8 @@ public class AdvertisingTime
         }
     }  
 
+ 
+
      
       //Llamada completa: Array de anuncios, tiempo por anuncio, fade entre anuncios
     public AdvertisingTime(GameObject[] addsToPlay, float timePerAdd, float fade)
@@ -56,53 +60,75 @@ public class AdvertisingTime
         AddsLibraryRef = addsToPlay;
         TimeShowingAdd = timePerAdd;
         Fade = fade;
+        FirstAdds = false;
 
 
         HUDAdd = GameObject.Find("Add");
         AddBackground = GameObject.Find("AddBackground");
-        Curtain = GameObject.Find("BigCurtain");
+        Curtain = GameObject.Find("Brain").GetComponent<Manager>().Curtain;
     }
     public AdvertisingTime(GameObject[] addsToPlay, float timePerAdd)
     {
         AddsLibraryRef = addsToPlay;
         TimeShowingAdd = timePerAdd;
        Fade = 1;
+        FirstAdds = false;
+
 
         HUDAdd = GameObject.Find("Add");
         AddBackground = GameObject.Find("AddBackground");
-        Curtain = GameObject.Find("BigCurtain");
+        Curtain = GameObject.Find("Brain").GetComponent<Manager>().Curtain;
     }
     public AdvertisingTime(GameObject[] addsToPlay)
     {
         AddsLibraryRef = addsToPlay;
         TimeShowingAdd = 3;
         Fade = 2;
-        
+        FirstAdds = false;
+
+
 
         HUDAdd = GameObject.Find("Add");
         AddBackground = GameObject.Find("AddBackground");
-        Curtain = GameObject.Find("BigCurtain");
+        Curtain = GameObject.Find("Brain").GetComponent<Manager>().Curtain;
     }
 
-   
 
+    public void FirstShoot()
+    {
+        FirstAdds = true;
+    }
         public void InitAddTime(MonoBehaviour mono)
         {
+
             mono.StartCoroutine(AddsLibrary(mono, AddsLibraryRef, Fade, TimeShowingAdd));
         }
 
         IEnumerator AddsLibrary(MonoBehaviour monobehaviour, GameObject[] adds, float fade, float timeShowingAdd)
         {
-            AddBackground.SetActive(true);
-
+            AddBackground.GetComponent<Image>().enabled= true;
+        GameObject talkingUI = GameObject.Find("Talking");
+        talkingUI.SetActive(false);
             foreach (GameObject add in adds)
             {
                 yield return monobehaviour.StartCoroutine(PlayAdd(add, fade, timeShowingAdd));
             }
-            AddBackground.SetActive(false);
-        
-        GameObject.Find("Brain").GetComponent<Manager>().Spotlights.SetActive(true);
+        AddBackground.GetComponent<Image>().enabled = false;
+        talkingUI.SetActive(true);
+        if (FirstAdds)
+        {
+            
+
+            GameObject.Find("Brain").GetComponent<Manager>().Spotlights.SetActive(true);
         GameObject.Find("Brain").GetComponent<Manager>().Spotlights.GetComponent<SpotLightController>().ShowPresentation();
+        }
+        else
+        {
+            Curtain.GetComponent<Animator>().SetTrigger("PlayCurtain");
+            GameObject.Find("Brain").GetComponent<Manager>().EndOfAdvertising();
+            GameObject.Find("Brain").GetComponent<Manager>().ResumeShow();
+        }
+       
 
         }     //library of adds to play
         IEnumerator PlayAdd(GameObject add, float playAddDelay, float timeShowingAdd)
