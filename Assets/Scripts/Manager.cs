@@ -9,7 +9,21 @@ using Cinemachine;
 
 public class Manager : MonoBehaviour
 {
-  
+
+    [Header("Phase2Commands")]
+    public Vector2 CandidatePresentationPos;
+    public Vector2 BubbleSpawnPos;
+    public Vector2 CompileShadowsPos;
+    public int CandidatePresentationTime;
+    public float SpeechBubbleZoomMultiplier;
+    public float TalkingDelay ;
+    public float BubbleMaxScale;      
+    public GameObject ComicDialogue;
+    public GameObject[] CandidateShadows;
+    private List<GameObject> ShadowsChecked;
+    private bool TalkingDialogue;
+    private Text TextBox;
+    private GameObject CurrentShadow;
 
     [Header("Cameras")]
     public GameObject[] Cams;
@@ -35,7 +49,8 @@ public class Manager : MonoBehaviour
    
     
      [Header ("Hosts")]
-    public GameObject Showman;
+    public GameObject ShowmanPrefab;
+    private GameObject Showman;
     public GameObject[] Houses;
     public Vector2 HouseOnStage;
     public float HouseEntryTime;
@@ -55,7 +70,7 @@ public class Manager : MonoBehaviour
 
     public enum ShowStatus
     {
-        ADVERTISING, PRESENTATION, SHOW
+        ADVERTISING, PRESENTATION, SHOW, PHASE1, PHASE2
     };
     
 
@@ -101,6 +116,10 @@ public class Manager : MonoBehaviour
 
     void Start()
     {
+        ShowmanSignIn();
+
+        ShadowsChecked = new List<GameObject>();
+        TextBox = gameObject.GetComponentInChildren<Text>();
 
         SpotLightAudiosource = NewAudiosource(Sounds, false, false);
 
@@ -161,6 +180,8 @@ public class Manager : MonoBehaviour
     }
     void Update()
     {
+        //Debug.Log(ShadowsChecked.Count);
+
         Debug.Log(ShowPhase);
         UpdateCensus();
         UpdateOverlap();
@@ -237,7 +258,7 @@ public class Manager : MonoBehaviour
            
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                EntryOnStage(Houses[0]);
+                Phase1_HousePresentation(Houses[0]);
             }
            
             if (Input.GetKeyDown(KeyCode.E) && _Census.Capacity > 0)
@@ -276,7 +297,7 @@ public class Manager : MonoBehaviour
       citizen.SetActive(false);
 
 
-        if (citizen.GetComponent<NpcController>().Identificator.Type=="Showman")
+        if (citizen.CompareTag("Showman"))
         {
             Showman = citizen.gameObject;
             return;
@@ -297,20 +318,27 @@ public class Manager : MonoBehaviour
 
 
 
-    void EntryOnStage(GameObject house)
+    public void Phase1_HousePresentation(GameObject house)
     {
+        ShowPhase = ShowStatus.PHASE1;
+
         GameObject houseCandidate = Instantiate(house) as GameObject;
 
-        SwapCamera(1, CinemachineBlendDefinition.Style.Cut);           
 
         StartCoroutine(HouseEntryStage(houseCandidate));
+    }
+    public void Phase2_CandidatesPresentation()
+    {
+
+        ShowPhase = ShowStatus.PHASE2;
+        StartCoroutine(P2_CandidatesPresentation());
     }
 
     void AdjustInterlocutorSpawnScale()
     {
 
     }
-    public void NpcToFirstPlane(Person npc, bool shadow)
+    public  void NpcToFirstPlane(Person npc, bool shadow)
     {
 
         TextBoxCanvas.SetActive(true);
@@ -338,18 +366,23 @@ public class Manager : MonoBehaviour
             Interlocutor2.GetComponent<NpcController>().Refresh(npc, 1, shadow);
             }  
         }
-        else
+        else  if (ShowPhase== ShowStatus.PHASE2)
         {
-            
-
+            Interlocutor2.SetActive(true);
+            Interlocutor2.GetComponent<NpcController>().Refresh(npc, 0, shadow);          
+        }
+        else 
+        {
             Interlocutor1.SetActive(true);
             Interlocutor1.GetComponent<NpcController>().Refresh(npc, 0, shadow);
-
         }
         //character.transform.localPosition = new Vector3(0,0,-69);
     }
     public  void SwapCamera(int shot, CinemachineBlendDefinition.Style blend)
     {
+        Interlocutor1.GetComponent<NpcController>().Reset();
+        Interlocutor2.GetComponent<NpcController>().Reset();
+
         GameObject.Find("Brain").GetComponent<CinemachineBrain>().m_DefaultBlend.m_Style = blend;
 
         foreach (GameObject cam in Cams)
@@ -373,8 +406,13 @@ public class Manager : MonoBehaviour
     }
     public void ShowmanSignIn()
     {
-            CreateCharacter(Showman, "Mr.Bug", 2000, new Vector2(10, -0.3f), Showman.name);
-        //Showman = GameObject.FindGameObjectWithTag("Showman");
+        if(Showman!=null)
+        {
+            return;
+        }
+
+          CreateCharacter(ShowmanPrefab, "Mr.Bug", 2000, new Vector2(10, -0.3f), ShowmanPrefab.name);
+       
 
     }
     void Presentation()
@@ -413,22 +451,45 @@ public class Manager : MonoBehaviour
     }
     IEnumerator HouseEntryStage(GameObject house)
     {
+
+        float firstDistance = Vector2.Distance(new Vector2(house.transform.position.x, house.transform.position.y), new Vector2(HouseOnStage.x, HouseOnStage.y));
+        float distance = Mathf.Abs(HouseOnStage.x - house.transform.position.x);
         Vector3 pos = house.transform.position;
         pos.x = -20;
         pos.z = 20;
         house.transform.position = pos;
-        while (Mathf.Abs(house.transform.position.x-HouseOnStage.x)>float.Epsilon)
+        SwapCamera(1, CinemachineBlendDefinition.Style.EaseInOut);
+
+        while ( distance>0.1f )
         {
-            house.transform.position = Vector2.Lerp(house.transform.position, HouseOnStage, Time.deltaTime/HouseEntryTime);
+          house.transform.position = Vector2.Lerp(house.transform.position, HouseOnStage, (Time.deltaTime*distance)/distance);
+            distance = Mathf.Abs(HouseOnStage.x - house.transform.position.x);
+                                  Debug.Log(distance);
+
             yield return null;
         }
+        NpcToFirstPlane(Showman.GetComponent<NpcController>().Identificator, false);
     }
-   public IEnumerator GameOver()
+    public IEnumerator GameOver()
     {
 
 
         while (Vector3.Distance(GameplayCam.transform.position, GameOverPos) > float.Epsilon)
         {
+            Debug.Log("algo");
+            GameplayCam.transform.position = Vector3.Slerp(GameplayCam.transform.position, GameOverPos, Time.deltaTime*0.5f);
+
+            yield return null;
+
+        }
+
+    }    public IEnumerator SpectatorCam()
+    {
+
+
+        while (Vector3.Distance(GameplayCam.transform.position, GameOverPos) > float.Epsilon)
+        {
+            Debug.Log("algo");
             GameplayCam.transform.position = Vector3.Slerp(GameplayCam.transform.position, GameOverPos, Time.deltaTime*0.5f);
 
             yield return null;
@@ -437,7 +498,7 @@ public class Manager : MonoBehaviour
 
     }
 
-   IEnumerator InstantiateCandidates(int number)
+   public IEnumerator InstantiateCandidates(int number)
     {
         Debug.Log("hellow");
 
@@ -452,7 +513,7 @@ public class Manager : MonoBehaviour
         }
 
     }
-    IEnumerator CheckCandidateRepeated(GameObject candidate)
+   IEnumerator CheckCandidateRepeated(GameObject candidate)
     {
 
         bool complete = false;
@@ -479,6 +540,134 @@ public class Manager : MonoBehaviour
                            yield return null;
 
         }
-       
 
+    IEnumerator P2_CandidatesPresentation()
+    {
+        int candidateNumber = -1;
+        foreach (Person candidate in Census)
+        {
+
+            candidateNumber++;
+            yield return StartCoroutine(P2_CandidatePresentationTime(candidate, candidateNumber));
+
+        }
+        StartCoroutine(P2_CompileShadows());
+    }
+   
+    IEnumerator P2_CandidatePresentationTime(Person candidate, int candidateNumb)
+    {
+           foreach(GameObject possibleShadow in CandidateShadows)
+        {
+            //Debug.Log(possibleShadow.name + ";" + candidate.ShadowRef);
+            if (possibleShadow.name==candidate.ShadowRef)
+            {
+                GameObject shadow = Instantiate(possibleShadow) as GameObject;
+                shadow.name = candidate.ShadowRef;
+                shadow.transform.position = CandidatePresentationPos;
+                ShadowsChecked.Add(shadow.gameObject);
+                CurrentShadow = shadow;
+                
+
+            }                   yield return null;
+
+        }
+        SwapCamera(2, CinemachineBlendDefinition.Style.EaseIn);
+        yield return new WaitForSeconds(gameObject.GetComponent<CinemachineBrain>().m_DefaultBlend.m_Time);
+
+
+        OverlapCurrentShot(true);
+
+        yield return StartCoroutine(TalkDialogue(CurrentShadow.GetComponent<ShadowCommands>().PresentationDialogue));
+        OverlapCurrentShot(false);
+
+        SwapCamera(1, CinemachineBlendDefinition.Style.Cut);
+                            GameObject.Find("Brain").GetComponent<Manager>().OverlapCurrentShot(false);
+
+        ShadowsChecked[candidateNumb].GetComponent<SpriteRenderer>().enabled=false;
+        yield return new WaitForSeconds(gameObject.GetComponent<CinemachineBrain>().m_DefaultBlend.m_Time);
+
+
+    }
+    IEnumerator WaitingInput()
+    {
+        while (!Input.GetKeyDown(KeyCode.KeypadEnter) || TalkingDialogue)
+        {
+
+            yield return null;
+
+
+        }
+    }
+    public IEnumerator TalkDialogue(string[] dialogue)
+    {
+        for (int i = 0; i < dialogue.Length; i++)
+        {
+            StartCoroutine(Talking((dialogue[i])));
+            yield return StartCoroutine(WaitingInput());
+
+        }
+    }
+
+ 
+    IEnumerator Talking(string line )
+    {
+
+        GameObject bocadilloDialogo = Instantiate(ComicDialogue) as GameObject;
+                                                          
+        bocadilloDialogo.transform.SetParent(GameObject.Find("Canvas").transform);
+        bocadilloDialogo.transform.localPosition = BubbleSpawnPos;
+
+        
+
+        //Anim.SetBool("Talk", true);
+        TalkingDialogue = true;
+        //TextFramework.GetComponent<Image>().sprite = LightBox[1];
+
+        //StartCoroutine(TextBoxTransform(bocadilloDialogo));
+        for (int i = 0; i <= line.Length; i++)
+        {
+
+
+            string currentText = line.Substring(0, i);
+            bocadilloDialogo.GetComponentInChildren<Text>().text = currentText;
+            yield return new WaitForSeconds(TalkingDelay);
+
+        }
+        //TextFramework.GetComponent<Image>().sprite = LightBox[0];
+        //Anim.SetBool("Talk", false);
+        TalkingDialogue = false;   
+      
+        StopCoroutine("Talking");
+    }
+    IEnumerator P2_CompileShadows()
+    {
+        SwapCamera(2, CinemachineBlendDefinition.Style.Cut);
+         for(int i =0; i<ShadowsChecked.Count;i++)
+        {
+            if (i==0)
+            {
+                ShadowsChecked[i].GetComponent<SpriteRenderer>().enabled = true;
+
+                ShadowsChecked[i].transform.position = CompileShadowsPos ;
+                yield return null;
+            }
+            else
+            {
+               ShadowsChecked[i].GetComponent<SpriteRenderer>().enabled = true;
+
+            ShadowsChecked[i].transform.position = new Vector2(ShadowsChecked[i - 1].GetComponent<BoxCollider2D>().bounds.max.x + Mathf.Abs(ShadowsChecked[i].transform.position.x-ShadowsChecked[i].GetComponent<BoxCollider2D>().bounds.min.x), ShadowsChecked[i - 1].transform.position.y);
+            yield return null;
+            }            
+        }
+        Debug.Log("o");
+        NpcToFirstPlane(Showman.GetComponent<NpcController>().Identificator, false);
+        yield return StartCoroutine(WaitingInput()); 
+
+        StartCoroutine(SpectatorCam());
+            yield return StartCoroutine(WaitingInput());
+    }
+    public void hack ()
+    {
+        ShowPhase = ShowStatus.SHOW;
+    }
 }

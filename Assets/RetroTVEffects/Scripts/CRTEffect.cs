@@ -277,9 +277,9 @@ namespace JetFistGames.RetroTVFX
                 this.yiq2rgb_mat.SetRow(2, new Vector4(1f, -1.106f, 1.703f, 0f));
             }
 
-            if (this.material == null)
+            if (material == null)
             {
-                this.material = new Material(shader);
+                material = new Material(shader);
             }
 
             material.SetMatrix("_RGB2YIQ_MAT", this.rgb2yiq_mat);

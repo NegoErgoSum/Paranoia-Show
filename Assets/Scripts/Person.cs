@@ -11,6 +11,18 @@ public class Person
     private string _Name;
     private string _Type;
     Npc_SpecialComponent special;
+    private string _ShadowRef;
+    public string ShadowRef
+    {
+        get
+        {
+            return _ShadowRef;
+        }
+        set
+        {
+            _ShadowRef = value;
+        }
+    }
 
 
     public string Name { get; set; }
@@ -91,6 +103,7 @@ public class Person
     {
         ID = Manager.IDAssign;
         Manager.IDAssign++;
+        ShadowRef = "Shadow_" +personPrefab.name;
 
         Type = personPrefab.name;
 

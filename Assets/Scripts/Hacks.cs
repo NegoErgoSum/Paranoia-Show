@@ -15,6 +15,14 @@ public class Hacks : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKey(KeyCode.T))
+        {
+            if(Input.GetKeyDown(KeyCode.Keypad1))
+            {
+                GameObject.Find("Brain").GetComponent<Manager>().hack();
+
+            }
+        }
        if (Input.GetKey(KeyCode.C))
         {
 
@@ -22,15 +30,15 @@ public class Hacks : MonoBehaviour
                 {
                 if (Input.GetKeyDown(KeyCode.Keypad1))
                 {
-                    GameObject.Find("Brain").GetComponent<Manager>().SwapCamera(0, CinemachineBlendDefinition.Style.Cut);
+                    GameObject.Find("Brain").GetComponent<Manager>().SwapCamera(0, CinemachineBlendDefinition.Style.EaseInOut);
                 }
                 if (Input.GetKeyDown(KeyCode.Keypad2))
                 {
-                    GameObject.Find("Brain").GetComponent<Manager>().SwapCamera(1, CinemachineBlendDefinition.Style.Cut);
+                    GameObject.Find("Brain").GetComponent<Manager>().SwapCamera(1, CinemachineBlendDefinition.Style.EaseInOut);
                 }
                 if (Input.GetKeyDown(KeyCode.Keypad3))
                 {
-                    GameObject.Find("Brain").GetComponent<Manager>().SwapCamera(2, CinemachineBlendDefinition.Style.Cut);
+                    GameObject.Find("Brain").GetComponent<Manager>().SwapCamera(2, CinemachineBlendDefinition.Style.EaseInOut);
                 }  
             }
             if (Input.GetKeyDown(KeyCode.O))
@@ -56,6 +64,12 @@ public class Hacks : MonoBehaviour
 
                 StartCoroutine(GameObject.Find("Brain").GetComponent<Manager>().GameOver());
             }
+        }     //Game hacks 
+        if (Input.GetKey(KeyCode.M)&& Input.GetKey(KeyCode.R)&& Input.GetKey(KeyCode.B))
+        {
+            GameObject.Find("Brain").GetComponent<Manager>().Interlocutor1.SetActive(true);
+       GameObject.Find("Brain").GetComponent<Manager>().NpcToFirstPlane((GameObject.Find("Brain").GetComponent<Manager>().ShowmanPrefab.GetComponent<Person>()), false);
+           
         }     //Game hacks
         if (Input.GetKey(KeyCode.S))       
         {
@@ -64,6 +78,23 @@ public class Hacks : MonoBehaviour
                 AdvertisingTime pack = new AdvertisingTime(GameObject.Find("Brain").GetComponent<Manager>().Adds, 2, 2);
 
                 GameObject.Find("Brain").GetComponent<Manager>().GoToAdvertising(pack);
+            }          
+             if (Input.GetKeyDown(KeyCode.C))
+            {
+                StartCoroutine(GameObject.Find("Brain").GetComponent<Manager>().InstantiateCandidates(3));
+            }
+            if (Input.GetKey(KeyCode.P))
+            {
+                if (Input.GetKeyDown(KeyCode.Keypad1))
+                {
+               GameObject.Find("Brain").GetComponent<Manager>().Phase1_HousePresentation(GameObject.Find("Brain").GetComponent<Manager>().Houses[0]);
+
+                }
+                if (Input.GetKeyDown(KeyCode.Keypad2))
+                {
+                    GameObject.Find("Brain").GetComponent<Manager>().Phase2_CandidatesPresentation();
+
+                }
             }
             if (Input.GetKeyDown(KeyCode.KeypadEnter))
             {
