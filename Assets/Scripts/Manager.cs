@@ -28,6 +28,9 @@ public class Manager : MonoBehaviour
     [Header("Cameras")]
     public GameObject[] Cams;
     public GameObject OverlapShot;
+    public GameObject OverlapCam;
+    public float[] OverlapCamScale;
+    public Vector3[] OverlapCamCoord;
     public Vector3[] OverlapShotCoord;
     public Vector3[] OverlapShotScale;
     public static GameObject CurrentCam;
@@ -152,12 +155,25 @@ public class Manager : MonoBehaviour
         UpdateOverlap();
         OverlapShot.SetActive(true);
     }
-    void UpdateOverlap()
+   IEnumerator UpdateOverlap()
     {
-        if (ShowPhase!= ShowStatus.SHOW)
+        bool overlapCam = (OverlapShot.activeSelf) ? true : false;
+        OverlapShot.SetActive(false);
+
+
+        if (ShowPhase== ShowStatus.ADVERTISING)
         {
             OverlapShot.SetActive(false);
-            return;
+            StopCoroutine(UpdateOverlap());
+            yield return null;
+        }
+        //else if (ShowPhase == ShowStatus.PHASE2)
+        //{
+        //}
+        yield return new WaitForSeconds(gameObject.GetComponent<CinemachineBrain>().m_DefaultBlend.m_Time);
+        if (overlapCam)
+        {
+            OverlapShot.SetActive(true);
         }
         for (int i = 0; i < Cams.Length; i++)
         {
@@ -165,6 +181,9 @@ public class Manager : MonoBehaviour
             {
                 OverlapShot.transform.position = OverlapShotCoord[i];
                 OverlapShot.transform.localScale = OverlapShotScale[i];
+                OverlapCam.transform.position = OverlapCamCoord[i];
+                OverlapCam.GetComponent<Camera>().orthographicSize = OverlapCamScale[i];
+
             }
         }
     }
@@ -320,6 +339,7 @@ public class Manager : MonoBehaviour
 
     public void Phase1_HousePresentation(GameObject house)
     {
+        OverlapShot.SetActive(false);
         ShowPhase = ShowStatus.PHASE1;
 
         GameObject houseCandidate = Instantiate(house) as GameObject;
@@ -329,6 +349,8 @@ public class Manager : MonoBehaviour
     }
     public void Phase2_CandidatesPresentation()
     {
+        OverlapShot.SetActive(false);
+
 
         ShowPhase = ShowStatus.PHASE2;
         StartCoroutine(P2_CandidatesPresentation());
@@ -366,11 +388,11 @@ public class Manager : MonoBehaviour
             Interlocutor2.GetComponent<NpcController>().Refresh(npc, 1, shadow);
             }  
         }
-        else  if (ShowPhase== ShowStatus.PHASE2)
-        {
-            Interlocutor2.SetActive(true);
-            Interlocutor2.GetComponent<NpcController>().Refresh(npc, 0, shadow);          
-        }
+        //else  if (ShowPhase== ShowStatus.PHASE2)
+        //{
+        //    Interlocutor2.SetActive(true);
+        //    Interlocutor2.GetComponent<NpcController>().Refresh(npc, 0, shadow);          
+        //}
         else 
         {
             Interlocutor1.SetActive(true);
@@ -380,10 +402,11 @@ public class Manager : MonoBehaviour
     }
     public  void SwapCamera(int shot, CinemachineBlendDefinition.Style blend)
     {
+
         Interlocutor1.GetComponent<NpcController>().Reset();
         Interlocutor2.GetComponent<NpcController>().Reset();
 
-        GameObject.Find("Brain").GetComponent<CinemachineBrain>().m_DefaultBlend.m_Style = blend;
+       gameObject.GetComponent<CinemachineBrain>().m_DefaultBlend.m_Style = blend;
 
         foreach (GameObject cam in Cams)
         {
@@ -391,6 +414,7 @@ public class Manager : MonoBehaviour
             {
                 cam.GetComponent<CinemachineVirtualCamera>().Priority = 2;
                 CurrentCam = cam;
+                StartCoroutine(UpdateOverlap());
 
             }
             else
@@ -543,6 +567,7 @@ public class Manager : MonoBehaviour
 
     IEnumerator P2_CandidatesPresentation()
     {
+        OverlapShot.SetActive(true);
         int candidateNumber = -1;
         foreach (Person candidate in Census)
         {
@@ -641,7 +666,9 @@ public class Manager : MonoBehaviour
     }
     IEnumerator P2_CompileShadows()
     {
-        SwapCamera(2, CinemachineBlendDefinition.Style.Cut);
+        OverlapShot.SetActive(true);
+
+        SwapCamera(0, CinemachineBlendDefinition.Style.Cut);
          for(int i =0; i<ShadowsChecked.Count;i++)
         {
             if (i==0)

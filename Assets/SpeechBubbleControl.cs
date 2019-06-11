@@ -56,10 +56,10 @@ public class SpeechBubbleControl : MonoBehaviour
             }
         #region ChangePos
         Vector2 currentTextBoxPos = gameObject.transform.position;
-        currentTextBoxPos.y += Time.deltaTime*2;
-        currentTextBoxPos.x -= Time.deltaTime*2;
-        //currentTextBoxPos.y += Random.Range(-2, 4) * Time.deltaTime;
-        //currentTextBoxPos.x -= Random.Range(-2, 5) * Time.deltaTime;
+        //currentTextBoxPos.y += Time.deltaTime*2;
+        //currentTextBoxPos.x -= Time.deltaTime*2;
+        currentTextBoxPos.y += Random.Range(-2, 4) * Time.deltaTime;
+        currentTextBoxPos.x -= Random.Range(-2, 5) * Time.deltaTime;
         gameObject.transform.position = currentTextBoxPos;
         #endregion  //Gradual movement
     }

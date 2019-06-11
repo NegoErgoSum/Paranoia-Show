@@ -788,7 +788,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CandidatePresentationPos: {x: 10, y: 3}
   BubbleSpawnPos: {x: 230, y: -150}
-  CompileShadowsPos: {x: 3, y: 2}
+  CompileShadowsPos: {x: 5, y: 2}
   CandidatePresentationTime: 50
   SpeechBubbleZoomMultiplier: 0.7
   TalkingDelay: 0.05
@@ -804,10 +804,19 @@ MonoBehaviour:
   - {fileID: 1089104131}
   - {fileID: 1745755087}
   OverlapShot: {fileID: 2000030980}
+  OverlapCam: {fileID: 1842289819}
+  OverlapCamScale:
+  - 0
+  - 4
+  - 5
+  OverlapCamCoord:
+  - {x: -7, y: 4, z: -10}
+  - {x: 10, y: 3.5, z: -10}
+  - {x: -7, y: 2, z: -10}
   OverlapShotCoord:
-  - {x: -7, y: 4, z: 0}
-  - {x: -2, y: 3.5, z: 0}
-  - {x: 1, y: 6.5, z: 0}
+  - {x: -7, y: 4, z: -40}
+  - {x: -2, y: 3.5, z: -40}
+  - {x: 1, y: 6.5, z: -40}
   OverlapShotScale:
   - {x: 16, y: 9, z: 1}
   - {x: 4, y: 3, z: 1}
@@ -827,7 +836,7 @@ MonoBehaviour:
   - {fileID: 3735857161923768086, guid: 38286bf3173b8ac47bd8b9f647d2cf68, type: 3}
   HouseOnStage: {x: -8, y: 0}
   HouseEntryTime: 205
-  CensusID: 010000000200000003000000
+  CensusID: 
   Curtain: {fileID: 1671335608}
   TextBoxCanvas: {fileID: 843449159}
   SpecialInterlocutorsComponent: []
@@ -1203,7 +1212,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &902209095
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1495,7 +1504,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &956173176
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2376,7 +2385,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!95 &1671335609
 Animator:
   serializedVersion: 3
@@ -3418,7 +3427,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2000030980}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.5350006, y: 5.551998, z: -38.223366}
+  m_LocalPosition: {x: 2.5350006, y: 5.551998, z: -40}
   m_LocalScale: {x: 12.768, y: 7.1819997, z: 0.399}
   m_Children: []
   m_Father: {fileID: 1788345217}
