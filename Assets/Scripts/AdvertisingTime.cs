@@ -158,7 +158,11 @@ public class AdvertisingTime
                 HUDAdd.GetComponent<Image>().color = fade;
                 yield return null;
             }
-            yield return null;
+
+        Color reset = HUDAdd.GetComponent<Image>().color;
+        reset.a = 0;
+        HUDAdd.GetComponent<Image>().color = reset;
+       yield return null;
 
         }    //fade and show time of an add
     }

@@ -11,7 +11,7 @@ public class Manager : MonoBehaviour
 {
 
     [Header("Phase2Commands")]
-    public Vector2 CandidatePresentationPos;
+    public Vector3 CandidatePresentationPos;
     public Vector2 BubbleSpawnPos;
     public Vector2 CompileShadowsPos;
     public int CandidatePresentationTime;
@@ -20,10 +20,14 @@ public class Manager : MonoBehaviour
     public float BubbleMaxScale;      
     public GameObject ComicDialogue;
     public GameObject[] CandidateShadows;
+    public Vector3[] BubbleSpeechCoord;
+    public Vector3[] BubbleSpeechRot;
     private List<GameObject> ShadowsChecked;
     private bool TalkingDialogue;
     private Text TextBox;
-    private GameObject CurrentShadow;
+    public GameObject CurrentShadow;
+
+
 
     [Header("Cameras")]
     public GameObject[] Cams;
@@ -33,6 +37,7 @@ public class Manager : MonoBehaviour
     public Vector3[] OverlapCamCoord;
     public Vector3[] OverlapShotCoord;
     public Vector3[] OverlapShotScale;
+    public Vector3[] OverlapShotRot;
     public static GameObject CurrentCam;
     public GameObject Interlocutor1, Interlocutor2;
     public GameObject Spotlights;
@@ -44,7 +49,7 @@ public class Manager : MonoBehaviour
     public Vector3 GameOverPos;
     private GameObject GameplayCam;
 
-
+    public List<GameObject> HousesOnStage;
 
 
     private List<Person> _Census;
@@ -55,7 +60,7 @@ public class Manager : MonoBehaviour
     public GameObject ShowmanPrefab;
     private GameObject Showman;
     public GameObject[] Houses;
-    public Vector2 HouseOnStage;
+    public Vector2 HouseOnStagePos;
     public float HouseEntryTime;
     public int[] CensusID;
     public GameObject Curtain;
@@ -119,6 +124,7 @@ public class Manager : MonoBehaviour
 
     void Start()
     {
+        HousesOnStage = new List<GameObject>();
         ShowmanSignIn();
 
         ShadowsChecked = new List<GameObject>();
@@ -181,7 +187,8 @@ public class Manager : MonoBehaviour
             {
                 OverlapShot.transform.position = OverlapShotCoord[i];
                 OverlapShot.transform.localScale = OverlapShotScale[i];
-                OverlapCam.transform.position = OverlapCamCoord[i];
+                OverlapCam.transform.localPosition = OverlapCamCoord[i];
+                OverlapShot.transform.localEulerAngles = OverlapShotRot[i];
                 OverlapCam.GetComponent<Camera>().orthographicSize = OverlapCamScale[i];
 
             }
@@ -342,10 +349,10 @@ public class Manager : MonoBehaviour
         OverlapShot.SetActive(false);
         ShowPhase = ShowStatus.PHASE1;
 
-        GameObject houseCandidate = Instantiate(house) as GameObject;
 
 
-        StartCoroutine(HouseEntryStage(houseCandidate));
+
+        StartCoroutine(HouseEntryStage(house));
     }
     public void Phase2_CandidatesPresentation()
     {
@@ -362,25 +369,24 @@ public class Manager : MonoBehaviour
     }
     public  void NpcToFirstPlane(Person npc, bool shadow)
     {
-
+        Debug.Log(Interlocutor1.GetComponent<NpcController>().NpcType);
         TextBoxCanvas.SetActive(true);
 
         //GameObject character = Instantiate(npc) as GameObject;
         if (Interlocutor1.activeSelf)
         {
-            if (Interlocutor2.activeSelf)
+            if (Interlocutor1.GetComponent<NpcController>().NpcType == "Showman")
             {
-                if (Interlocutor1.GetComponent<NpcController>().NpcType=="Showman")
-                {
+                Interlocutor1.GetComponent<NpcController>().Refresh(npc, 0, shadow);
+            }
+            else if (!Interlocutor2.activeSelf)
+            {
+                
+                
+
                     Interlocutor2.SetActive(true);
                     Interlocutor2.GetComponent<NpcController>().Refresh(npc, 0, shadow);
-                }
-                else
-                {
-
-                    Interlocutor1.SetActive(true);
-                    Interlocutor1.GetComponent<NpcController>().Refresh(npc, 0, shadow);
-                }
+                
             }
             else
             {
@@ -442,8 +448,8 @@ public class Manager : MonoBehaviour
     void Presentation()
     {
         EnterShowman(false);
-        Interlocutor1.GetComponent<NpcController>().Dialogue = new string[FirstDialogue.Length];
-        System.Array.Copy(FirstDialogue, Interlocutor1.GetComponent<NpcController>().Dialogue ,FirstDialogue.Length);
+        Interlocutor1.GetComponent<NpcController>().Dialogue = new string[] { gameObject.GetComponent<DialogueLibrary>().ShowmanPresentation[Random.Range(0, gameObject.GetComponent<DialogueLibrary>().ShowmanPresentation.Length)] } ;
+        //System.Array.Copy(FirstDialogue, Interlocutor1.GetComponent<NpcController>().Dialogue ,FirstDialogue.Length);
         ResumeShow();
 
     }
@@ -475,20 +481,40 @@ public class Manager : MonoBehaviour
     }
     IEnumerator HouseEntryStage(GameObject house)
     {
+        GameObject houseCandidate = Instantiate(house) as GameObject;
+        Vector3 spawnPos = HouseOnStagePos;
+        spawnPos.x -= 10;
+        houseCandidate.transform.position = spawnPos;
+        HousesOnStage.Add(houseCandidate);
 
-        float firstDistance = Vector2.Distance(new Vector2(house.transform.position.x, house.transform.position.y), new Vector2(HouseOnStage.x, HouseOnStage.y));
-        float distance = Mathf.Abs(HouseOnStage.x - house.transform.position.x);
-        Vector3 pos = house.transform.position;
-        pos.x = -20;
-        pos.z = 20;
-        house.transform.position = pos;
+        float firstDistance = Vector2.Distance(new Vector2(houseCandidate.transform.position.x, houseCandidate.transform.position.y), new Vector2(HouseOnStagePos.x, HouseOnStagePos.y));
+        float distance = Mathf.Abs(HouseOnStagePos.x - houseCandidate.transform.position.x);
+        //Vector3 pos = houseCandidate.transform.position;
+        //pos.x = -20;
+        //pos.z = 20;
+        //houseCandidate.transform.position = pos;
+        //Interlocutor1.GetComponent<NpcController>().Dialogue = new string[] { gameObject.GetComponent<DialogueLibrary>().HousePresentations[Random.Range(0, gameObject.GetComponent<DialogueLibrary>().HousePresentations.Count)] };
+        gameObject.GetComponent<DialogueLibrary>().SetName();
+
+        string[] dialogue = new string[] { gameObject.GetComponent<DialogueLibrary>().HousePresentations[Random.Range(0, gameObject.GetComponent<DialogueLibrary>().HousePresentations.Count)] };
+
+
+        NpcToFirstPlane(Showman.GetComponent<NpcController>().Identificator, false);
+
+        StartCoroutine(Interlocutor1.GetComponent<NpcController>().TalkDialogue(dialogue));
+
+        yield return StartCoroutine(WaitingInput());
+
         SwapCamera(1, CinemachineBlendDefinition.Style.EaseInOut);
+
+        yield return new WaitForSeconds(gameObject.GetComponent<CinemachineBrain>().m_DefaultBlend.m_Time);
+
 
         while ( distance>0.1f )
         {
-          house.transform.position = Vector2.Lerp(house.transform.position, HouseOnStage, (Time.deltaTime*distance)/distance);
-            distance = Mathf.Abs(HouseOnStage.x - house.transform.position.x);
-                                  Debug.Log(distance);
+          houseCandidate.transform.position = Vector2.Lerp(houseCandidate.transform.position, HouseOnStagePos, (Time.deltaTime*2)/distance);
+            distance = Mathf.Abs(HouseOnStagePos.x - houseCandidate.transform.position.x);
+                                  //Debug.Log(distance);
 
             yield return null;
         }
@@ -524,7 +550,6 @@ public class Manager : MonoBehaviour
 
    public IEnumerator InstantiateCandidates(int number)
     {
-        Debug.Log("hellow");
 
         AvailableCandidates.Clear();
         AvailableCandidates = CharacterCase.OfType<GameObject>().ToList();
@@ -589,6 +614,7 @@ public class Manager : MonoBehaviour
                 GameObject shadow = Instantiate(possibleShadow) as GameObject;
                 shadow.name = candidate.ShadowRef;
                 shadow.transform.position = CandidatePresentationPos;
+                shadow.transform.eulerAngles = new Vector3(0, 90, 0);
                 ShadowsChecked.Add(shadow.gameObject);
                 CurrentShadow = shadow;
                 
@@ -602,7 +628,7 @@ public class Manager : MonoBehaviour
 
         OverlapCurrentShot(true);
 
-        yield return StartCoroutine(TalkDialogue(CurrentShadow.GetComponent<ShadowCommands>().PresentationDialogue));
+        yield return StartCoroutine(TalkDialogue(CurrentShadow.GetComponent<ShadowCommands>().PresentationDialogue, candidate));
         OverlapCurrentShot(false);
 
         SwapCamera(1, CinemachineBlendDefinition.Style.Cut);
@@ -623,26 +649,73 @@ public class Manager : MonoBehaviour
 
         }
     }
-    public IEnumerator TalkDialogue(string[] dialogue)
+    public IEnumerator TalkDialogue(string[] dialogue, Person candidate)
     {
         for (int i = 0; i < dialogue.Length; i++)
         {
-            StartCoroutine(Talking((dialogue[i])));
+           if (HousesOnStage[0].GetComponent<HousePersonality>().WishedFamily==candidate.Type)
+            {
+                StartCoroutine(PlayBubbleSpeech((dialogue[i]),candidate));
+
+            }
+           else
+            {
+                               StartCoroutine(PlayBubbleSpeech((dialogue[i]),candidate));
+
+            }
+            //Debug.Log(HousesOnStage[0].GetComponent<HousePersonality>().Protocol);
             yield return StartCoroutine(WaitingInput());
 
         }
     }
 
+    IEnumerator UpdateBubbleSpeech(GameObject bubble)
+    {
+        for (int i = 0; i < Cams.Length; i++)
+        {
+            if (Cams[i] == CurrentCam)
+            {
+                bubble.transform.localPosition = CurrentShadow.transform.localPosition;
+                //bubble.transform.localEulerAngles = BubbleSpeechRot[i];
+                
+            }
+            yield return null;
+        }
+    }
  
-    IEnumerator Talking(string line )
+    IEnumerator PlayBubbleSpeech(string line, Person candidate)
     {
 
-        GameObject bocadilloDialogo = Instantiate(ComicDialogue) as GameObject;
-                                                          
-        bocadilloDialogo.transform.SetParent(GameObject.Find("Canvas").transform);
-        bocadilloDialogo.transform.localPosition = BubbleSpawnPos;
+        GameObject speechBubble = Instantiate(ComicDialogue) as GameObject;
 
-        
+        if (HousesOnStage[0].GetComponent<HousePersonality>().WishedFamily==candidate.Type)
+        {
+            speechBubble.GetComponent<SpeechBubbleControl>().Protocol = HousesOnStage[0].GetComponent<HousePersonality>().Actitude;
+        }
+        else
+            {
+            speechBubble.GetComponent<SpeechBubbleControl>().RandomPersonality();
+
+        }
+
+
+
+        //speechBubble.GetComponent<RectTransform>().position = CurrentShadow.transform.localPosition;
+
+        //yield return StartCoroutine(UpdateBubbleSpeech(speechBubble));
+        speechBubble.transform.SetParent(GameObject.Find("Canvas").transform);
+
+
+        speechBubble.GetComponent<RectTransform>().transform.localPosition = new Vector3(0,0,830);
+        speechBubble.GetComponent<RectTransform>().transform.localEulerAngles = Vector3.zero;
+
+
+
+        Debug.Log(CurrentShadow.transform.localPosition);
+        //speechBubble.transform.localScale = new Vector3(20, 20, 1);
+
+
+
 
         //Anim.SetBool("Talk", true);
         TalkingDialogue = true;
@@ -654,7 +727,7 @@ public class Manager : MonoBehaviour
 
 
             string currentText = line.Substring(0, i);
-            bocadilloDialogo.GetComponentInChildren<Text>().text = currentText;
+            speechBubble.GetComponentInChildren<Text>().text = currentText;
             yield return new WaitForSeconds(TalkingDelay);
 
         }
@@ -664,6 +737,8 @@ public class Manager : MonoBehaviour
       
         StopCoroutine("Talking");
     }
+
+  
     IEnumerator P2_CompileShadows()
     {
         OverlapShot.SetActive(true);

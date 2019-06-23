@@ -132,6 +132,8 @@ NpcSprite = npc.Appearance.GetComponent<Image>().sprite;
 
     IEnumerator Talking(string line)
     {
+        TextBox.GetComponent<Text>().text = "";
+
         Anim.SetBool("Talk", true);
         TalkingDialogue = true;
         TextFramework.GetComponent<Image>().sprite = LightBox[1];

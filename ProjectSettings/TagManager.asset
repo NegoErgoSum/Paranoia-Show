@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Showman
   - VirtualCamera
+  - House
   layers:
   - Default
   - TransparentFX

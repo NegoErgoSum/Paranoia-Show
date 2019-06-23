@@ -110,8 +110,12 @@ public class Person
         this.Appearance = personPrefab;
         this.Name = name;
         this.BirthYear = birthYear;
-       
+
+
+
 
     }
+
+    
 
 }
