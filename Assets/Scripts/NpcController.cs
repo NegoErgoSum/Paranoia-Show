@@ -83,7 +83,7 @@ public class NpcController : MonoBehaviour
 NpcSprite = npc.Appearance.GetComponent<Image>().sprite;
         NpcType = npc.Type;
 
-        GameObject.Find("Brain").GetComponent<Manager>().SpecialInterlocutorsComponent[interlocutor].gameObject.name = "Item";
+        //GameObject.Find("Brain").GetComponent<Manager>().SpecialInterlocutorsComponent[interlocutor].gameObject.name = "Item";
 
         
         gameObject.GetComponent<Npc_SpecialComponent>().SwitchType(this.NpcType);
@@ -94,7 +94,8 @@ NpcSprite = npc.Appearance.GetComponent<Image>().sprite;
     }
 
     public void Reset()
-    {                        
+    {
+        GameObject.Find("Brain").GetComponent<Manager>().TextBoxCanvas.SetActive(false);
         gameObject.GetComponent<Image>().sprite= null;
         gameObject.GetComponent<NpcController>().NpcType= null;
         gameObject.GetComponent<Animator>().runtimeAnimatorController= null;
@@ -102,7 +103,11 @@ NpcSprite = npc.Appearance.GetComponent<Image>().sprite;
     }
     public void Talk(string[] dialogue)
     {
+        GameObject.Find("Brain").GetComponent<Manager>().TextBoxCanvas.SetActive(true);
+
         StartCoroutine(TalkDialogue(Dialogue));
+   
+
     }
 
     IEnumerator WaitingInput()
