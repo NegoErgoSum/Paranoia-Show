@@ -3064,11 +3064,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PersonajeRiggeado
       objectReference: {fileID: 0}
-    - target: {fileID: 100134, guid: a8370157d6e9cd648ae299dda9443980, type: 3}
+    - target: {fileID: 100058, guid: a8370157d6e9cd648ae299dda9443980, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 100058, guid: a8370157d6e9cd648ae299dda9443980, type: 3}
+    - target: {fileID: 100134, guid: a8370157d6e9cd648ae299dda9443980, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
