@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 189310461682449063}
   - component: {fileID: 189310461682449080}
   - component: {fileID: 189310461682449081}
+  - component: {fileID: 3843201907549178835}
   m_Layer: 5
   m_Name: Contestant_Irni
   m_TagString: Untagged
@@ -94,3 +95,16 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &3843201907549178835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 189310461682449083}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf30b289bf81b7441a907e316ba37851, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RagDoll: {fileID: 7743629835981576566, guid: 1e852b88cc67e854fabd643a9c92ccb6, type: 3}

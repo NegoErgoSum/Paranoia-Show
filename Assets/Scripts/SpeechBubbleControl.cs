@@ -31,7 +31,7 @@ public class SpeechBubbleControl : MonoBehaviour
         Childs = new List<GameObject>();
         SpeechBubbleZoomMultiplier = GameObject.Find("Brain").GetComponent<Manager>().SpeechBubbleZoomMultiplier;
         MaxScale = GameObject.Find("Brain").GetComponent<Manager>().BubbleMaxScale;
-        SpawnPos = new Vector3(GameObject.Find("Brain").GetComponent<Manager>().CurrentShadow.transform.localPosition.x, GameObject.Find("Brain").GetComponent<Manager>().CurrentShadow.transform.localPosition.y, GameObject.Find("Brain").GetComponent<Manager>().CurrentShadow.transform.localPosition.z);
+        //SpawnPos = new Vector3(GameObject.Find("Brain").GetComponent<Manager>().CurrentShadow.transform.localPosition.x, GameObject.Find("Brain").GetComponent<Manager>().CurrentShadow.transform.localPosition.y, GameObject.Find("Brain").GetComponent<Manager>().CurrentShadow.transform.localPosition.z);
         //transform.localPosition = Vector3.zero;
         //transform.localEulerAngles = Vector3.zero;
         StartCoroutine(AddChilds());

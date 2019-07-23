@@ -12,6 +12,7 @@ public class Person
     private string _Type;
     Npc_SpecialComponent special;
     private string _ShadowRef;
+    private GameObject _StageBuddy;
     public string ShadowRef
     {
         get
@@ -21,6 +22,17 @@ public class Person
         set
         {
             _ShadowRef = value;
+        }
+    }
+    public GameObject StageBuddy
+    {
+        get
+        {
+            return _StageBuddy;
+        }
+        set
+        {
+            _StageBuddy = value;
         }
     }
 
@@ -110,6 +122,7 @@ public class Person
         this.Appearance = personPrefab;
         this.Name = name;
         this.BirthYear = birthYear;
+        StageBuddy = Appearance.gameObject.GetComponent<Buddy>().RagDoll;
 
 
 

@@ -77,7 +77,8 @@ public class NpcController : MonoBehaviour
         gameObject.SetActive(false);        
     }
     public void Refresh(Person npc, int interlocutor, bool shadow)
-    {              gameObject.GetComponent<Animator>().runtimeAnimatorController = npc.Appearance.GetComponent<Animator>().runtimeAnimatorController;
+    {
+        gameObject.GetComponent<Animator>().runtimeAnimatorController = npc.Appearance.GetComponent<Animator>().runtimeAnimatorController;
 
         gameObject.GetComponent<Animator>().SetBool("Shadow", shadow);
 NpcSprite = npc.Appearance.GetComponent<Image>().sprite;
@@ -123,7 +124,8 @@ NpcSprite = npc.Appearance.GetComponent<Image>().sprite;
     public IEnumerator TalkDialogue(string[] dialogue)
     {
         for (int i = 0; i < dialogue.Length; i++)
-        {
+        {            
+
             StartCoroutine(Talking(dialogue[i]));
             yield return StartCoroutine(WaitingInput());
 

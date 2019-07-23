@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class HousePersonality : MonoBehaviour
 {
+    public Conversation_House Dialogues;
     public string WishedFamily;
     //public SpeechBubbleControl._Protocols Protocol;
     public string Name;
+    public string[] FirstInterview;
+    public string[] HouseFirstDialogue;
+    
     //public enum _Personality
     //{
     //  NORMALITA, HIPERACTIVA
@@ -22,12 +26,12 @@ public class HousePersonality : MonoBehaviour
         {
             case 1:
                 {
-                    Actitude = BehaviourLibrary.Behaviour.ELEGANT;
+                    Actitude = BehaviourLibrary.Behaviour.NORMAL;
                     break;
                 }
             case 2:
                 {
-                    Actitude = BehaviourLibrary.Behaviour.ELEGANT;
+                    Actitude = BehaviourLibrary.Behaviour.NERVOUS;
                     break;
                 }
             case 3:

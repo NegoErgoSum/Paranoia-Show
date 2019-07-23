@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5114758032235953919}
   - component: {fileID: 5114758032235953888}
   - component: {fileID: 5114758032235953889}
+  - component: {fileID: 1804947259393094793}
   m_Layer: 5
   m_Name: Contestant_Ray
   m_TagString: Untagged
@@ -94,3 +95,16 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1804947259393094793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5114758032235953891}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf30b289bf81b7441a907e316ba37851, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RagDoll: {fileID: 4548166875935628295, guid: 471822b43c400d0409e31be384c0563f, type: 3}

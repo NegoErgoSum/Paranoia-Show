@@ -86,6 +86,7 @@ GameObject:
   - component: {fileID: 4495230598631963439}
   - component: {fileID: 4495230598631963440}
   - component: {fileID: 4495230598631963441}
+  - component: {fileID: 4967475816248280991}
   m_Layer: 5
   m_Name: Showman
   m_TagString: Showman
@@ -169,3 +170,16 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &4967475816248280991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4495230598631963443}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf30b289bf81b7441a907e316ba37851, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RagDoll: {fileID: 1574245165791919620, guid: 79ba2e961c07ba14d8f0be10882438c8, type: 3}
