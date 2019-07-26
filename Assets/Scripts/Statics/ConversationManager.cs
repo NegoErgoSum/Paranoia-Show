@@ -10,6 +10,15 @@ public class ConversationManager : Singleton<ConversationManager>
     protected ConversationManager() { }
 
 
+    [Header("Cassette Slot")]
+    [Header("##############")]
+    public Conversation_Cassette CurrentCassete;
+    public ConversationTape CurrentTape { get; set; }
+    [Header("##############")]
+
+
+
+
     public Conversation_Showman ShowmanScript;
     public Conversation_House HouseScript;
 
@@ -107,3 +116,94 @@ public class ConversationManager : Singleton<ConversationManager>
 
 
 }
+
+public class ConversationTape
+{
+
+    public ConversationTape(Conversation_Showman showman, Conversation_House house, Conversation_Candidates candidates)
+    {
+        ShowmanTape = showman;
+        HouseTape = house;
+        CandidatesTape = candidates;
+
+    }
+    #region HouseTape
+    private Conversation_House HouseTape;
+    private Dialogue HouseDialogue;
+    private Dialogue HouseGreeting;
+
+    public HousePresentation ShowmanGreetsHouse;
+    #endregion
+
+    #region ShowmanTape
+    public Conversation_Showman ShowmanTape;
+
+    private Reactions[] _ShowmanReactions;
+    private ShowPresentations _ShowmanPresentation;
+    private CandidatesPresentation _ShowmanGreetsCandidates;
+
+    public Reactions[] ShowmanReactions
+    {
+        get
+        {
+            return _ShowmanReactions;
+        }
+        set
+        {
+            value = _ShowmanReactions;
+        }
+    }
+    public ShowPresentations ShowmanPresentation
+    {
+        get
+        {
+            return _ShowmanPresentation;
+        }
+        set
+        {
+            value = _ShowmanPresentation;
+        }
+    }
+    public CandidatesPresentation ShowmanGreetsCandidates
+    {
+        get
+        {
+            return _ShowmanGreetsCandidates;
+        }
+        set
+        {
+            value = _ShowmanGreetsCandidates;
+        }
+    }
+    #endregion
+
+    public Conversation_Candidates CandidatesTape;
+    private string BestCandidatePresentation;
+    private string NeutralCandidatePresentation;
+    private string WorstCandidatePresentation;
+
+    void Start()
+    {
+        ShowmanPresentation = ShowmanTape.PossibleShowPresentations[Random.Range(0, ShowmanTape.PossibleShowPresentations.Length)];
+
+        ShowmanGreetsHouse = ShowmanTape.PossibleHousePresentations[Random.Range(0, ShowmanTape.PossibleHousePresentations.Length)];
+        HouseGreeting = HouseTape.dialogues[Random.Range(0, HouseTape.dialogues.Length)];
+
+        ShowmanGreetsCandidates = ShowmanTape.ShowmanGreetsCandidates[Random.Range(0, ShowmanTape.ShowmanGreetsCandidates.Length)];
+
+
+        BestCandidatePresentation = CandidatesTape.BestCandidateDialogues[Random.Range(0, CandidatesTape.BestCandidateDialogues.Length)].text;
+        NeutralCandidatePresentation = CandidatesTape.NeutralCandidateDialogues[Random.Range(0, CandidatesTape.NeutralCandidateDialogues.Length)].text;
+        WorstCandidatePresentation = CandidatesTape.WorstCandidateDialogues[Random.Range(0, CandidatesTape.WorstCandidateDialogues.Length)].text;
+
+
+        ShowmanReactions = ShowmanTape.ShowmanReactions;
+
+
+    }
+
+
+}
+
+
+

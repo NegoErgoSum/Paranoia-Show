@@ -9,7 +9,7 @@ public class Conversation_Candidates : ScriptableObject
     //Variable tipo "Dialogue" (tipo creado más abajo)
     public CandidateTape[] BestCandidateDialogues; 
     public CandidateTape[] NeutralCandidateDialogues; 
-    public CandidateTape[] WorrstCandidateDialogues; 
+    public CandidateTape[] WorstCandidateDialogues; 
 }
 
 [System.Serializable]
@@ -19,7 +19,7 @@ public class Conversation_Candidates : ScriptableObject
 public class CandidateTape
 {
     [TextArea(3, 10)]
-    public string[] text;
+    public string text;
     public Conversation_House response;
 
 

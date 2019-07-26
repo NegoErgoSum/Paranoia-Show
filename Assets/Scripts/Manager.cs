@@ -572,10 +572,10 @@ public class Manager : MonoBehaviour
     {
                 //yield return StartCoroutine(WaitingInput());
 
-        string[] dialogue2 = ConversationManager.Instance.ShowmanScript.PossibleHousePresentations[Random.Range(0, ConversationManager.Instance.ShowmanScript.PossibleHousePresentations.Length)].HousePresentationDialogue;
+        string[] showmanGreetsHouse = ConversationManager.Instance.CurrentTape.ShowmanGreetsHouse.HousePresentationDialogue;   
+        yield return StartCoroutine(ReplaceDialogueKeywords(showmanGreetsHouse));
 
 
-        yield return StartCoroutine(ReplaceDialogueKeywords(dialogue2));
 
         TextBoxCanvas.GetComponentInChildren<Text>().text = "";
 
