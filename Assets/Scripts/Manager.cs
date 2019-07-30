@@ -10,8 +10,10 @@ using Cinemachine;
 public class Manager : MonoBehaviour
 {
 
-    private Dialogue CurrentMovieScript;
-    public Conversation_House ShowmanPresentationCandidatesScript;
+    private Conversation_Cassette CurrentCassette;
+
+    //private Dialogue CurrentMovieScript;
+    //public Conversation_House ShowmanPresentationCandidatesScript;
     public Vector3 ShowmanSpawnPos;
     [Header("Phase1Commands")]
     public GameObject SpotsPlane;
@@ -138,9 +140,18 @@ public class Manager : MonoBehaviour
 
     void Start()
     {
-        
 
         HousesOnStage = new List<GameObject>();
+
+
+        GameObject houseCandidate = Instantiate(Houses[Random.Range(0, Houses.Length)]) as GameObject;
+        Vector3 spawnPos = HouseOnStagePos;
+        spawnPos.x -= 20;
+        houseCandidate.transform.position = spawnPos;
+        HousesOnStage.Add(houseCandidate);
+
+        CurrentCassette = ConversationManager.Instance.InsertCassette;
+
         ShowmanSignIn();
 
         ShadowsChecked = new List<GameObject>();
@@ -371,12 +382,9 @@ public class Manager : MonoBehaviour
         Debug.Log("#####PHASE1####");
 
 
-        GameObject houseCandidate = Instantiate(house) as GameObject;
-        Vector3 spawnPos = HouseOnStagePos;
-        spawnPos.x -= 20;
-        houseCandidate.transform.position = spawnPos;
+      
 
-        HousesOnStage.Add(houseCandidate);
+
 
 
 
@@ -384,16 +392,16 @@ public class Manager : MonoBehaviour
         OverlapCamPanel.SetActive(false);
         ShowPhase = ShowStatus.PHASE1;
 
-        ConversationManager.Instance.current = HousesOnStage[0].GetComponent<HousePersonality>().Dialogues.dialogues[Random.Range(0, HousesOnStage[0].GetComponent<HousePersonality>().Dialogues.dialogues.Length)];
+        //ConversationManager.Instance.current = HousesOnStage[0].GetComponent<HousePersonality>().Dialogues.dialogues[Random.Range(0, HousesOnStage[0].GetComponent<HousePersonality>().Dialogues.dialogues.Length)];
 
-        CurrentMovieScript = ConversationManager.Instance.current;
-
-
+        //CurrentMovieScript = ConversationManager.Instance.current;
 
 
-        StartCoroutine(P1_HouseEntryStage(houseCandidate));
+
+
+        StartCoroutine(P1_HouseEntryStage(HousesOnStage[0]));
     }
-    public void Phase2_CandidatesPresentation()
+    public void Phase3_CandidatesPresentation()
     {
         OverlapCamPanel.SetActive(false);
 
@@ -410,7 +418,6 @@ public class Manager : MonoBehaviour
 
    IEnumerator NpcToFirstPlane2(Person npc, bool shadow)
     {
-        Debug.Log(Interlocutor1.GetComponent<NpcController>().NpcType);
         TextBoxCanvas.SetActive(true);
 
         //GameObject character = Instantiate(npc) as GameObject;
@@ -530,14 +537,18 @@ public class Manager : MonoBehaviour
     }
     IEnumerator Presentation()
     {
+        OverlapCam.SetActive(false);
         yield return new  WaitForSeconds(2);
         EnterShowman(false);
-        Interlocutor1.GetComponent<NpcController>().Dialogue = ConversationManager.Instance.ShowmanScript.PossibleShowPresentations[Random.Range(0, ConversationManager.Instance.ShowmanScript.PossibleShowPresentations.Length)].PresentantionDialogue;
+        //Interlocutor1.GetComponent<NpcController>().Dialogue = ConversationManager.Instance.ShowmanScript.PossibleShowPresentations[Random.Range(0, ConversationManager.Instance.ShowmanScript.PossibleShowPresentations.Length)].PresentantionDialogue;
+        
+        
+        
         //System.Array.Copy(FirstDialogue, Interlocutor1.GetComponent<NpcController>().Dialogue ,FirstDialogue.Length);
-       yield return StartCoroutine(Interlocutor1.GetComponent<NpcController>().TalkDialogue(  Interlocutor1.GetComponent<NpcController>().Dialogue ));
             ResumeShow();
+        yield return StartCoroutine(Interlocutor1.GetComponent<NpcController>().TalkDialogue(  ConversationManager.Instance.P1_ShowPresentation.PresentantionDialogue));
 
-        yield return StartCoroutine(WaitingInput());
+        //yield return StartCoroutine(WaitingInput());
         Phase1_HousePresentation(Houses[0]);
 
     }
@@ -570,22 +581,30 @@ public class Manager : MonoBehaviour
     IEnumerator P1_HouseEntryStage(GameObject houseCandidate)
 
     {
-                //yield return StartCoroutine(WaitingInput());
+        Debug.Log("HouseEntryStage");
 
-        string[] showmanGreetsHouse = ConversationManager.Instance.CurrentTape.ShowmanGreetsHouse.HousePresentationDialogue;   
-        yield return StartCoroutine(ReplaceDialogueKeywords(showmanGreetsHouse));
+        yield return StartCoroutine(WaitingInput());
 
+        #region ShowmanPresentHouse
+
+        yield return StartCoroutine(ReplaceDialogueKeywords(ConversationManager.Instance.P2_ShowmanPresentHouse));
+        string[] showmanPresentHouse = ConversationManager.Instance.NextCheckedText;
 
 
         TextBoxCanvas.GetComponentInChildren<Text>().text = "";
 
-        StartCoroutine(Interlocutor1.GetComponent<NpcController>().TalkDialogue(ConversationManager.Instance.Current));
+      yield return StartCoroutine(NpcToFirstPlane2(Showman.GetComponent<NpcController>().Identificator, false));
+                          
+        StartCoroutine(Interlocutor1.GetComponent<NpcController>().TalkDialogue(showmanPresentHouse));
+
+        #endregion
 
         yield return StartCoroutine(WaitingInput());
 
 
-        Dialogue currentConversation = ConversationManager.Instance.current;
 
+
+       
         float timeToReachTarget = HouseEntrySeconds;
         float t = 0;
 
@@ -603,18 +622,18 @@ public class Manager : MonoBehaviour
 
 
 
-        NpcToFirstPlane(Showman.GetComponent<NpcController>().Identificator, false);
+        //NpcToFirstPlane(Showman.GetComponent<NpcController>().Identificator, false);
 
-        string[] dialogue = ConversationManager.Instance.ShowmanScript.PossibleHousePresentations[Random.Range(0, ConversationManager.Instance.ShowmanScript.PossibleHousePresentations.Length)].HousePresentationDialogue;
+        //string[] dialogue = ConversationManager.Instance.ShowmanScript.PossibleHousePresentations[Random.Range(0, ConversationManager.Instance.ShowmanScript.PossibleHousePresentations.Length)].HousePresentationDialogue;
 
 
-        yield return StartCoroutine(ReplaceDialogueKeywords(dialogue));
+        //yield return StartCoroutine(ReplaceDialogueKeywords(dialogue));
 
         TextBoxCanvas.GetComponentInChildren<Text>().text = "";
 
-        StartCoroutine(Interlocutor1.GetComponent<NpcController>().TalkDialogue(ConversationManager.Instance.Current));
+        //StartCoroutine(Interlocutor1.GetComponent<NpcController>().TalkDialogue(showmanAsk));
 
-        yield return StartCoroutine(WaitingInput());
+        //yield return StartCoroutine(WaitingInput());
 
 
         SpotsPlane.SetActive(false);
@@ -639,7 +658,7 @@ public class Manager : MonoBehaviour
             yield return null;
         }
 
-        yield return StartCoroutine(P1_ShowmanGreetsHouse());
+        yield return StartCoroutine(P1_ShowmanBuddyMovesTowardsHouse());
 
         //int randomInterviewBeginning = Random.Range(0, house.GetComponent<HousePersonality>().FirstInterview.Length);
 
@@ -654,14 +673,8 @@ public class Manager : MonoBehaviour
 
 
 
-        Conversation_House conversation = houseCandidate.GetComponent<HousePersonality>().Dialogues;
 
-        Dialogue choosenDialogue = ConversationManager.Instance.current;
-
-        string[] currentDialogue = new string[] { choosenDialogue.Sentence };
-
-
-        yield return StartCoroutine(P1_HouseFirstSpeak(houseCandidate, currentDialogue));
+        yield return StartCoroutine(P1_HouseFirstSpeak(houseCandidate));
 
     }
          IEnumerator ReplaceDialogueKeywords(string[] dialogue)
@@ -691,15 +704,40 @@ public class Manager : MonoBehaviour
             yield return null;
 
         }
-        Debug.Log(dialogueLines[0]);
-        ConversationManager.Instance.Current = dialogueLines.ToArray();
-        yield return null;
+        ConversationManager.Instance.NextCheckedText = dialogueLines.ToArray();
+
+            yield return dialogueLines.ToArray();
 
     }
-    IEnumerator P1_HouseFirstSpeak(GameObject house, string[] dialogue)
+    IEnumerator P1_HouseFirstSpeak(GameObject house)
     {
 
-        for (int i = 0; i < dialogue.Length; i++)
+
+        #region ShowmanAskHouse
+        string[] showmanAsk = { ConversationManager.Instance.P2_ShowmanQuestion.ShowmanAsk }; 
+
+        yield return StartCoroutine(ReplaceDialogueKeywords(showmanAsk));
+        showmanAsk = ConversationManager.Instance.NextCheckedText ;
+
+
+        TextBoxCanvas.GetComponentInChildren<Text>().text = "";
+        NpcToFirstPlane(Showman.GetComponent<NpcController>().Identificator, false);
+        StartCoroutine(Interlocutor1.GetComponent<NpcController>().TalkDialogue(showmanAsk));
+        Debug.Log("HouseFirstSpeak");
+
+
+        #endregion
+
+        yield return StartCoroutine(WaitingInput());
+
+
+
+
+        string[] houseResponse = { ConversationManager.Instance.P2_ShowmanQuestion.HouseReponse.HouseResponse };
+
+
+
+        for (int i = 0; i < houseResponse.Length; i++)
         {
             TalkingDialogue = true;
 
@@ -711,7 +749,7 @@ public class Manager : MonoBehaviour
 
            
 
-            SpeechBubbleManager speechBubble2 = new SpeechBubbleManager(house, CurrentMovieScript.Sentence);
+            SpeechBubbleManager speechBubble2 = new SpeechBubbleManager(house, houseResponse[i]);
             speechBubble2.CloneParameters(speechBubble.GetComponent<SpeechBubbleManager>());
 
             speechBubble.GetComponent<SpeechBubbleManager>().Initialize();
@@ -720,7 +758,7 @@ public class Manager : MonoBehaviour
 
             TalkingDialogue = false;
 
-            if (i==dialogue.Length-1)
+            if (i== houseResponse.Length-1)
             {
 
                 yield return StartCoroutine(WaitingLastBubble(speechBubble));
@@ -731,33 +769,16 @@ public class Manager : MonoBehaviour
 
         }
        
-
-
-        NpcToFirstPlane(Showman.GetComponent<NpcController>().Identificator, false);
-
-
-        TextBoxCanvas.GetComponentInChildren<Text>().text = "";
-        Interlocutor1.GetComponent<NpcController>().Dialogue = new string[0];
-
-
-        string[] dialogueOption = new string[] { CurrentMovieScript.options[Random.Range(0, CurrentMovieScript.options.Length)].text };
-
-
-        StartCoroutine(Interlocutor1.GetComponent<NpcController>().TalkDialogue(dialogueOption));
-        yield return StartCoroutine(WaitingInput());
-
-        ConversationManager.Instance.SelectOption(Random.Range(0, CurrentMovieScript.options.Length));
-
-        string[] showmanPresentCandidates = new string[] { ShowmanPresentationCandidatesScript.dialogues[Random.Range(0, ShowmanPresentationCandidatesScript.dialogues.Length)].Sentence };
-    StartCoroutine(Interlocutor1.GetComponent<NpcController>().TalkDialogue(showmanPresentCandidates));
+        string[] showmanPresentCandidates =ConversationManager.Instance.P3_ShowmanPresentCandidates;
+        StartCoroutine(Interlocutor1.GetComponent<NpcController>().TalkDialogue(showmanPresentCandidates));
 
 
         TalkingDialogue = true;
         yield return StartCoroutine(WaitingInput());
 
-        Phase2_CandidatesPresentation();
+        Phase3_CandidatesPresentation();
     }
-    IEnumerator P1_ShowmanGreetsHouse()
+    IEnumerator P1_ShowmanBuddyMovesTowardsHouse()
     {
         float timeToResearchTargetSeconds = ShowmanGreetingHouseTime * 10;
         GameObject buddy = Showman.gameObject.GetComponent<NpcController>().Identificator.StageBuddy.gameObject;

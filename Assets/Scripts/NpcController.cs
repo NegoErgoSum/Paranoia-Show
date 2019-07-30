@@ -124,8 +124,8 @@ NpcSprite = npc.Appearance.GetComponent<Image>().sprite;
     public IEnumerator TalkDialogue(string[] dialogue)
     {
         for (int i = 0; i < dialogue.Length; i++)
-        {            
-
+        {
+            
             StartCoroutine(Talking(dialogue[i]));
             yield return StartCoroutine(WaitingInput());
 

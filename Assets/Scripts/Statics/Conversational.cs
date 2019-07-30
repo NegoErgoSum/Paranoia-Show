@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Conversational : MonoBehaviour
 {
-    public Conversation_House conversation;
+    //public Conversation_House conversation;
 
           public void Update()
     {
@@ -15,7 +15,7 @@ public class Conversational : MonoBehaviour
     }
   public void TriggerConversation()
     {
-        ConversationManager.Instance.StartConversation(conversation);
+        //ConversationManager.Instance.StartConversation(conversation);
 
     }
 }

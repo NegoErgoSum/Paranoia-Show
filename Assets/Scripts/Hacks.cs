@@ -92,7 +92,7 @@ public class Hacks : MonoBehaviour
                 }
                 if (Input.GetKeyDown(KeyCode.Keypad2))
                 {
-                    GameObject.Find("Brain").GetComponent<Manager>().Phase2_CandidatesPresentation();
+                    GameObject.Find("Brain").GetComponent<Manager>().Phase3_CandidatesPresentation();
 
                 }
             }

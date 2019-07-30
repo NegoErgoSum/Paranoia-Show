@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class HousePersonality : MonoBehaviour
 {
-    public Conversation_House Dialogues;
+
+    public ShowCensus._HouseType HouseType;
+    public ShowmanTape_ShowmanGreetsHouse Dialogues;
     public string WishedFamily;
     //public SpeechBubbleControl._Protocols Protocol;
     public string Name;

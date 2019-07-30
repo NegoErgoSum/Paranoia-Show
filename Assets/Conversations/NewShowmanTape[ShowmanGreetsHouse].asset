@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab01b8934bfce1d41aab404eeb84db57, type: 3}
+  m_Name: NewShowmanTape[ShowmanGreetsHouse]
+  m_EditorClassIdentifier: 
+  ShowmanGreetsHouse:
+  - Type: 0
+    ShowmanGreeting:
+    - HousePresentations:
+      - "Presentaci\xF3n casa 1\nL\xEDnea 1"
+    - HousePresentations:
+      - "Presentaci\xF3n casa 2\nL\xEDnea 1"
+      - "Presentaci\xF3n casa 2\nL\xEDnea 2"
+    ShowmanAskHouse:
+    - ShowmanAsk: Pregunta 1
+      HouseReponse:
+        HouseResponse: Respuesta1
+    - ShowmanAsk: Pregunta2
+      HouseReponse:
+        HouseResponse: Respuesta 2

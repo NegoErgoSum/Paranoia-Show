@@ -9873,11 +9873,11 @@ GameObject:
   m_Component:
   - component: {fileID: 534669905}
   - component: {fileID: 534669908}
+  - component: {fileID: 534669909}
   - component: {fileID: 534669906}
   - component: {fileID: 534669907}
   - component: {fileID: 534669904}
   - component: {fileID: 534669903}
-  - component: {fileID: 534669909}
   m_Layer: 0
   m_Name: Brain
   m_TagString: MainCamera
@@ -9966,8 +9966,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14b0f728dac82aa47bc750d35e9bf179, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ShowmanPresentationCandidatesScript: {fileID: 11400000, guid: 7490731cd172ae5478bf719344f8474c,
-    type: 2}
   ShowmanSpawnPos: {x: 20, y: 1.6, z: -10}
   SpotsPlane: {fileID: 1469409108}
   HouseEntrySpeed: 5
@@ -10104,7 +10102,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 534669902}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4b83dc7ccb214fa43b8e6eb798a6ded6, type: 3}
   m_Name: 
@@ -10126,12 +10124,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe8b203307b826f458c875bf134493f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ShowmanScript: {fileID: 11400000, guid: c6b886c018eb797489933d9f708487c9, type: 2}
-  HouseScript: {fileID: 0}
-  current:
-    Sentence: 
-    options: []
-  Current: []
+  InsertCassette: {fileID: 11400000, guid: 7c83956121762a84d99397ec6835bb5d, type: 2}
+  NextCheckedText: []
+  P1_ShowPresentation:
+    PresentantionDialogue:
+    - 
+  P2_ShowmanPresentHouse: []
+  P2_ShowmanQuestion:
+    ShowmanAsk: 
+    HouseReponse:
+      HouseResponse: 
+  P3_ShowmanPresentCandidates: []
 --- !u!4 &536539162 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7356994402625327584, guid: dcf3259a294703a40866dfc6c9863c12,
@@ -14165,7 +14168,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: effa0b46a5379074b956a7f1a34c0778, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  conversation: {fileID: 0}
 --- !u!4 &752862396
 Transform:
   m_ObjectHideFlags: 0
@@ -19799,9 +19801,45 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1051771585}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6e5e2c741e414724bb82e6b18576760a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Name: 
+  m_EditorClassIdentifier: 
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!20 &1051771587

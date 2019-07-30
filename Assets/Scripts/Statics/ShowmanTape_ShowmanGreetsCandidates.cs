@@ -3,41 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-[CreateAssetMenu(fileName ="NewShowmanTape", menuName ="ConverationSystem/ShowmanTape", order =4)]
-[System.Serializable]
-public class Conversation_Showman : ScriptableObject 
-{
-    [Tooltip("/houseName => nombre de la casa")]
-    public SetNote Tutorial;
 
-    //[TextArea(3,10)]
-    public ShowPresentations[] PossibleShowPresentations = new ShowPresentations[1];
-    public HousePresentation[] PossibleHousePresentations = new HousePresentation[1];
 
-    public CandidatesPresentation[] ShowmanGreetsCandidates;
-    public Reactions[] ShowmanReactions;     
-}
+[CreateAssetMenu(fileName = "NewShowmanTape[ShowmanGreetsCandidates]", menuName = "ConversationSystem/ShowmanTape/[ShowmanGreetsCandidates]", order = 3)]
 [System.Serializable]      
-public class ShowPresentations
+public class ShowmanTape_ShowmanGreetsCandidates: ScriptableObject
 {
-
+    [Tooltip("Cada elemento de la array contiene una posible presentación de los candidatos (ej: dejemos que los candidatos se presenten...)")]
     [TextArea(3, 10)]
     public string[] PresentantionDialogue = new string[1];
 }
-[System.Serializable]      
-public class CandidatesPresentation
-{
 
-    [TextArea(3, 10)]
-    public string[] PresentantionDialogue = new string[1];
-}
-[System.Serializable]      
-public class HousePresentation
-{
 
-    [TextArea(3, 10)]
-    public string[] HousePresentationDialogue = new string[1];
-}
 //[System.Serializable]
 
 //public class PresentationDialogues
@@ -50,13 +27,13 @@ public class HousePresentation
 public class SetTape  
 {
     private string[] ShowPresentations;
-    private Reactions[] PossibleReactions;
-    public SetTape(string[] showPresentations, Reactions[] reactions)
+    private ShowmanTape_ShowmanReactions[] PossibleReactions;
+    public SetTape(string[] showPresentations, ShowmanTape_ShowmanReactions[] reactions)
     {
         ShowPresentations = showPresentations;
     }
 
-    private Reactions _ShowmanReaction;
+    private ShowmanTape_ShowmanReactions _ShowmanReaction;
     private string _ShowPresentation;
 
     public string ShowPresentation
@@ -73,7 +50,7 @@ public class SetTape
             }
         }
     }
-    public Reactions ShowmanReaction
+    public ShowmanTape_ShowmanReactions ShowmanReaction
     {
         get
         {
@@ -89,12 +66,6 @@ public class SetTape
     }
 }
 
-[System.Serializable]
-public class Reactions
-{
-    [TextArea(3, 10)]
-    public string[] Funny, Surprised, Angry, Sad;
-}       
 
 [System.Serializable]
 [CustomPropertyDrawer(typeof(SetNote))]
