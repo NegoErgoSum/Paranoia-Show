@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName ="NewCandidatesTape[CandidatesPresentation]", menuName ="ConversationSystem/CandidatesTape/[CandidatesPresentation]", order =4)]
+[CreateAssetMenu(fileName ="NewCandidatesTape[CandidatesPresentation]", menuName ="ConversationSystem/CandidatesTape/3.2[CandidatesPresentation]", order =4)]
 [System.Serializable]
 public class CandidatesTape_CandidatesPresentation : ScriptableObject 
 {

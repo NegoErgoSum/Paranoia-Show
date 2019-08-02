@@ -12,7 +12,7 @@ public class SpeechBubbleManager : MonoBehaviour
 
     private Person Candidate;
     private GameObject House;
-    private string Line;
+    public string Line { get; set; }
 
 
     public enum _Speaker

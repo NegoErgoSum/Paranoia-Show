@@ -5,7 +5,7 @@ using UnityEditor;
 
 
 
-[CreateAssetMenu(fileName = "NewShowmanTape[ShowmanGreetsCandidates]", menuName = "ConversationSystem/ShowmanTape/[ShowmanGreetsCandidates]", order = 3)]
+[CreateAssetMenu(fileName = "NewShowmanTape[ShowmanGreetsCandidates]", menuName = "ConversationSystem/ShowmanTape/3.1[ShowmanGreetsCandidates]", order = 3)]
 [System.Serializable]      
 public class ShowmanTape_ShowmanGreetsCandidates: ScriptableObject
 {

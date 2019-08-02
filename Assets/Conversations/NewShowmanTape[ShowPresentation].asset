@@ -19,6 +19,6 @@ MonoBehaviour:
   - PresentantionDialogue:
     - "Presentaci\xF3n 2\nL\xEDnea 1"
     - "Presentaci\xF3n 2\nL\xEDnea 2"
-    - "Presentaci\xF3n 3\nL\xEDnea 2"
+    - "Presentaci\xF3n 2\nL\xEDnea 3"
   - PresentantionDialogue:
-    - 3
+    - "Presentaci\xF3n 3\nL\xEDnea 1"

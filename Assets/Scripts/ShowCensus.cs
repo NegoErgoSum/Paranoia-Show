@@ -6,7 +6,7 @@ public class ShowCensus : MonoBehaviour
 {
    public enum _HouseType
     {
-      MedievalHouse, House2, House3, House4
+      MedievalHouse, StoneHouse, ImpressionistHouse, SurrealistHouse, WoodHouse
     };
     public _HouseType HouseType;
 }

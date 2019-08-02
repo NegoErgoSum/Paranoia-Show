@@ -6,6 +6,7 @@ public class HousePersonality : MonoBehaviour
 {
 
     public ShowCensus._HouseType HouseType;
+    public ShowCensus._HouseType AntiHouseType;
     public ShowmanTape_ShowmanGreetsHouse Dialogues;
     public string WishedFamily;
     //public SpeechBubbleControl._Protocols Protocol;

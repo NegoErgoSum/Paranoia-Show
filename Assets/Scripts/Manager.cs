@@ -407,7 +407,7 @@ public class Manager : MonoBehaviour
 
 
         ShowPhase = ShowStatus.PHASE2;
-        StartCoroutine(P2_CandidatesPresentation());
+        StartCoroutine(P3_CandidatesPresentation());
     }
 
     void AdjustInterlocutorSpawnScale()
@@ -877,7 +877,7 @@ public class Manager : MonoBehaviour
 
         }
 
-    IEnumerator P2_CandidatesPresentation()
+    IEnumerator P3_CandidatesPresentation()
     {
         OverlapCamPanel.SetActive(true);
         int candidateNumber = -1;
@@ -885,13 +885,13 @@ public class Manager : MonoBehaviour
         {
 
             candidateNumber++;
-            yield return StartCoroutine(P2_CandidatePresentationTime(candidate, candidateNumber));
+            yield return StartCoroutine(P3_CandidatePresentationTime(candidate, candidateNumber));
 
         }
         StartCoroutine(P2_CompileShadows());
     }
    
-    IEnumerator P2_CandidatePresentationTime(Person candidate, int candidateNumb)
+    IEnumerator P3_CandidatePresentationTime(Person candidate, int candidateNumb)
     {
 
         candidate.StageBuddy.transform.position = CandidatePresentationPos;
@@ -929,7 +929,7 @@ public class Manager : MonoBehaviour
 
         OverlapCurrentShot(true);
 
-        yield return StartCoroutine(CandidatePresentationSpeak(CurrentShadow.GetComponent<ShadowCommands>().PresentationDialogue, candidate));
+        yield return StartCoroutine(P3_DistributePresentations(candidate));
         OverlapCurrentShot(false);
 
         SwapCamera(1, CinemachineBlendDefinition.Style.Cut);
@@ -940,8 +940,30 @@ public class Manager : MonoBehaviour
 
 
     }
-   
-    public IEnumerator CandidatePresentationSpeak(string[] dialogue, Person candidate)
+    IEnumerator P3_DistributePresentations(Person candidate)
+    {
+        string[] presentationDialogue = new string[1];
+
+        if (HousesOnStage[0].GetComponent<HousePersonality>().HouseType == candidate.HouseType)
+        {
+            presentationDialogue = new string[]{ ConversationManager.Instance.P3_BestCandidatePresentation};
+
+        }
+        else if (HousesOnStage[0].GetComponent<HousePersonality>().AntiHouseType == candidate.HouseType)
+        {
+            presentationDialogue = new string[] { ConversationManager.Instance.P3_WorstCandidatePresentation };
+        } 
+        else
+        {
+            presentationDialogue = new string[]{ ConversationManager.Instance.P3_NeutralCandidatePresentation };   
+        }
+
+
+         yield return StartCoroutine(P3_CandidatePresentationSpeak(presentationDialogue, candidate));
+        yield return null;
+    }
+
+    public IEnumerator P3_CandidatePresentationSpeak(string[] dialogue, Person candidate)
     {
        
 
@@ -955,19 +977,28 @@ public class Manager : MonoBehaviour
             speechBubble.AddComponent<SpeechBubbleManager>();
             speechBubble.transform.SetParent(GameObject.Find("Canvas").transform);
 
-            if (HousesOnStage[0].GetComponent<HousePersonality>().WishedFamily == candidate.Type)
+            SpeechBubbleManager speechBubble2 = new SpeechBubbleManager(candidate, dialogue[i]);
+
+            if (HousesOnStage[0].GetComponent<HousePersonality>().HouseType == candidate.HouseType)
             {
                 speechBubble.gameObject.GetComponent<SpeechBubbleControl>().Protocol = HousesOnStage[0].GetComponent<HousePersonality>().Actitude;
+                speechBubble2.Line = ConversationManager.Instance.P3_BestCandidatePresentation;
+
+            }
+            if (HousesOnStage[0].GetComponent<HousePersonality>().AntiHouseType == candidate.HouseType)
+            {
+                speechBubble2.Line = ConversationManager.Instance.P3_WorstCandidatePresentation;
+
             }
             else
             {
-                speechBubble.gameObject.GetComponent<SpeechBubbleControl>().RandomPersonality();
+                speechBubble2.Line = ConversationManager.Instance.P3_NeutralCandidatePresentation;
+
             }
 
 
-            SpeechBubbleManager speechBubble2 = new SpeechBubbleManager(candidate, dialogue[i]);
-            speechBubble2.CloneParameters(speechBubble.GetComponent<SpeechBubbleManager>());
 
+            speechBubble2.CloneParameters(speechBubble.GetComponent<SpeechBubbleManager>()); 
             speechBubble.GetComponent<SpeechBubbleManager>().Initialize();
 
 

@@ -113,7 +113,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76c01430101789345b86a9388cb374e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Dialogues: {fileID: 11400000, guid: a214f855c91f9e84991edbf3a4f93635, type: 2}
+  HouseType: 0
+  AntiHouseType: 1
+  Dialogues: {fileID: 0}
   WishedFamily: Contestant_Golazo
   Name: Julia
   FirstInterview:

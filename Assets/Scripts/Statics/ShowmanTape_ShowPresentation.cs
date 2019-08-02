@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-[CreateAssetMenu(fileName = "NewShowmanTape[ShowPresentation]", menuName = "ConversationSystem/ShowmanTape/[ShowPresentation]", order = 1)]
+[CreateAssetMenu(fileName = "NewShowmanTape[ShowPresentation]", menuName = "ConversationSystem/ShowmanTape/1.[ShowPresentation]", order = 1)]
 [System.Serializable]
 public class ShowmanTape_ShowPresentation : ScriptableObject
 {

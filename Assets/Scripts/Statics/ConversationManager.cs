@@ -26,6 +26,9 @@ public class ConversationManager : Singleton<ConversationManager>
     public ShowmanQuestion P2_ShowmanQuestion;
 
     public string[] P3_ShowmanPresentCandidates;
+    public string P3_BestCandidatePresentation;
+    public string P3_NeutralCandidatePresentation;
+    public string P3_WorstCandidatePresentation;
 
     void Start()
     {
@@ -136,16 +139,16 @@ public class ConversationManager : Singleton<ConversationManager>
 
         private void SetCassettte(Conversation_Cassette cassette, MonoBehaviour mono)
         {
-            
 
-              ConversationManager.Instance.P1_ShowPresentation = cassette.ShowPresentation.PossiblePresentations[Random.Range(0, cassette.ShowPresentation.PossiblePresentations.Length)];
+            ConversationManager.Instance.P1_ShowPresentation = cassette.ShowPresentation.PossiblePresentations[Random.Range(0, cassette.ShowPresentation.PossiblePresentations.Length)];
 
             mono.StartCoroutine(TapeShuffle_ShowmanGreetsHouse(cassette));
 
-             mono.StartCoroutine(TapeShuffle_ShowmanAskHouse(cassette));
-
+            mono.StartCoroutine(TapeShuffle_ShowmanAskHouse(cassette));        
 
             ConversationManager.Instance.P3_ShowmanPresentCandidates = new string[] { cassette.ShowmanGreetsCandidates.PresentantionDialogue[Random.Range(0, cassette.ShowmanGreetsCandidates.PresentantionDialogue.Length)] };
+
+            mono.StartCoroutine(TapeShuffle_CandidatePresentation(cassette));
 
 
 
@@ -172,6 +175,27 @@ public class ConversationManager : Singleton<ConversationManager>
                     ConversationManager.Instance.P2_ShowmanPresentHouse = type.ShowmanGreeting[Random.Range(0, type.ShowmanGreeting.Length)].HousePresentations;
                 }
                 yield return null;
+            }
+        }
+        public  IEnumerator TapeShuffle_CandidatePresentation(Conversation_Cassette cassette)
+        {
+            
+            foreach (Crushing type in cassette.CandidatesPresentation.Feeling)
+            {
+                if (type.HouseType == GameObject.Find("Brain").GetComponent<Manager>().HousesOnStage[0].GetComponent<HousePersonality>().HouseType)
+                {
+                    ConversationManager.Instance.P3_BestCandidatePresentation = type.BestCandidateDialogues[Random.Range(0,type.BestCandidateDialogues.Length)].text;
+
+                    ConversationManager.Instance.P3_NeutralCandidatePresentation = type.NeutralCandidateDialogues[Random.Range(0, type.NeutralCandidateDialogues.Length)].text;
+
+
+                    ConversationManager.Instance.P3_WorstCandidatePresentation = type.WorstCandidateDialogues[Random.Range(0, type.WorstCandidateDialogues.Length)].text;
+
+                    yield return null;
+
+                }
+                yield return null;
+               
             }
         }
 

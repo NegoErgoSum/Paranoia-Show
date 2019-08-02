@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "NewHouseTape[HouseQuestion]", menuName = "ConversationSystem/HouseTape/[HouseQuestion]", order = 5)]
+[CreateAssetMenu(fileName = "NewHouseTape[HouseQuestion]", menuName = "ConversationSystem/HouseTape/4.[HouseQuestion]", order = 5)]
 [System.Serializable]
 public class HouseTape_HouseQuestion : ScriptableObject
 {
