@@ -299,8 +299,13 @@ public class ConversationManager : Singleton<ConversationManager>
 [System.Serializable]
 public class KeyWords
 {
-   
 
+    [Tooltip("HouseName => /houseName \nHouseWish => /houseWish \nHouePersonality => /housePersonality")]
+    public KeyWordsT Tutorial;
+}
+[System.Serializable]
+public class KeyWordsT
+{
 }
 
 

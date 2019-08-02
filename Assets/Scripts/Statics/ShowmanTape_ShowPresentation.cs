@@ -7,8 +7,8 @@ using UnityEngine;
 [System.Serializable]
 public class ShowmanTape_ShowPresentation : ScriptableObject
 {
-    [Tooltip("HouseName => /houseName \nHouseWish => /houseWish \nHouePersonality => /housePersonality")]
-    public KeyWords Tutorial;
+    public KeyWords TextCommand;
+
 
 
     [Tooltip("Cada elemento de la array contiene una posible presentación para el show, que puede contener una o varias líneas de texto")]   

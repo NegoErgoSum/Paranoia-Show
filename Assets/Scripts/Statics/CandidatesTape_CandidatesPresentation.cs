@@ -6,8 +6,8 @@ using UnityEngine;
 [System.Serializable]
 public class CandidatesTape_CandidatesPresentation : ScriptableObject 
 {
-    [Tooltip("HouseName => /houseName \nHouseWish => /houseWish \nHouePersonality => /housePersonality")]
-    public KeyWords Tutorial;
+    public KeyWords TextCommand;
+
 
 
     [Tooltip("Cada elemento de la array representa a un tipo de casa (ej: medievalHouse) y contiene 3 arrays de posibles presentaciones (mejores, neutros y peores). Es interesantes que haya varias de cada para darle variedad")]

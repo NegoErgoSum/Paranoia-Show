@@ -6,8 +6,7 @@ using UnityEngine;
 [System.Serializable]
 public class ShowmanTape_ShowmanGreetsHouse : ScriptableObject
 {
-    [Tooltip("HouseName => /houseName \nHouseWish => /houseWish \nHouePersonality => /housePersonality")]
-    public KeyWords Tutorial;
+    public KeyWords TextCommand;
 
     [Tooltip ("Cada elemento de la array hace referencia a un tipo de casa (ej: medieval), solo debe existir un elemento de cada tipo en la array")]
     public HouseType[] ShowmanGreetsHouse = new HouseType[1];

@@ -6,8 +6,7 @@ using UnityEngine;
 [System.Serializable]
 public class HouseTape_HouseQuestion : ScriptableObject
 {
-    [Tooltip("HouseName => /houseName \nHouseWish => /houseWish \nHouePersonality => /housePersonality")]
-    public KeyWords Tutorial;
+    public KeyWords TextCommand;
 
     [Tooltip("Cada elemento de la array representa un tipo de casa (ej: medievalHouse), y las posibles preguntas que puede hacer. Solo ha de haber un elmento con el mismo tipo de casa en la array")]
     public HouseQuestions[] HouseQuestion = new HouseQuestions[1];

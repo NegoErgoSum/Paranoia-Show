@@ -9,6 +9,9 @@ using UnityEditor;
 [System.Serializable]      
 public class ShowmanTape_ShowmanGreetsCandidates: ScriptableObject
 {
+    public KeyWords TextCommand;
+
+
     [Tooltip("Cada elemento de la array contiene una posible presentación de los candidatos (ej: dejemos que los candidatos se presenten...)")]
     [TextArea(3, 10)]
     public string[] PresentantionDialogue = new string[1];
