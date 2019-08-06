@@ -25,6 +25,9 @@ public class Manager : MonoBehaviour
     public Vector3 ShowmanGreetingHousePos;
     private string[] ShowmanGreetingText;
 
+    [Header("DefaultSpeechBubbleParameters")]
+         public float TalkingDelay ;
+
 
     [Header("Phase2Commands")]
     public Vector3 CandidatePresentationPos;
@@ -33,7 +36,6 @@ public class Manager : MonoBehaviour
     public int CandidatePresentationTime;
     public float SpeechBubbleZoomMultiplier;
     [Range(0.05f,0.5f)]
-    public float TalkingDelay ;
     public float BubbleMaxScale;
     public float DistanceBetweenShadows;
     public GameObject ComicDialogue;
@@ -150,6 +152,10 @@ public class Manager : MonoBehaviour
         houseCandidate.transform.position = spawnPos;
         HousesOnStage.Add(houseCandidate);
 
+
+
+
+
         CurrentCassette = ConversationManager.Instance.InsertCassette;
 
         ShowmanSignIn();
@@ -170,12 +176,13 @@ public class Manager : MonoBehaviour
         _Census = new List<Person>();
         //StartCoroutine(AddsLibrary(Adds)) ;
 
-        
 
+
+        StartCoroutine(InstantiateCandidates(3));
 
     }
 
-    
+
 
     public void OverlapCurrentShot(bool overlap)
     {
@@ -572,7 +579,6 @@ public class Manager : MonoBehaviour
             Curtain.GetComponent<Animator>().SetTrigger("PlayCurtain");
             Spotlights.SetActive(false);
             SpotLightAudiosource.Play();
-            StartCoroutine(InstantiateCandidates(3));
 
         }
         NpcToFirstPlane(Showman.GetComponent<NpcController>().Identificator, shadow);
@@ -677,7 +683,7 @@ public class Manager : MonoBehaviour
         yield return StartCoroutine(P1_HouseFirstSpeak(houseCandidate));
 
     }
-         IEnumerator ReplaceDialogueKeywords(string[] dialogue)
+    IEnumerator ReplaceDialogueKeywords(string[] dialogue)
     {
         List<string> dialogueLines = new List<string>();
 
@@ -774,7 +780,6 @@ public class Manager : MonoBehaviour
 
 
         TalkingDialogue = true;
-        yield return StartCoroutine(WaitingInput());
 
         Phase3_CandidatesPresentation();
     }
@@ -839,6 +844,8 @@ public class Manager : MonoBehaviour
     {
 
         AvailableCandidates.Clear();
+
+        
         AvailableCandidates = CharacterCase.OfType<GameObject>().ToList();
 
         for (int i =1; i<=number; i++)
@@ -846,8 +853,42 @@ public class Manager : MonoBehaviour
             int random = Random.Range(0, AvailableCandidates.Count);
             yield return StartCoroutine(CheckCandidateRepeated(AvailableCandidates[random]));
 
+
+        }
+        StartCoroutine(SetCandidatesPriority());
+        yield return null;
+
+    }
+
+    IEnumerator SetCandidatesPriority()
+    {
+        int census = Census.Count;
+        foreach(Person candidate in Census)
+        {
+            if (HousesOnStage[0].GetComponent<HousePersonality>().HouseType == candidate.HouseType)
+            {
+                candidate.Priority = ShowCensus._CandidatesFeeling.BEST;
+                census++;
+                yield return null;     
+            }
+            else if (HousesOnStage[0].GetComponent<HousePersonality>().AntiHouseType == candidate.HouseType||census==2)
+            {
+                candidate.Priority = ShowCensus._CandidatesFeeling.WORST;
+                census++;
+                yield return null;
+            }
+            else
+            {
+                candidate.Priority = ShowCensus._CandidatesFeeling.NEUTRAL;
+                census++;
+                yield return null;
+            }
+
         }
 
+       
+
+        yield return null;
     }
    IEnumerator CheckCandidateRepeated(GameObject candidate)
     {
@@ -863,6 +904,7 @@ public class Manager : MonoBehaviour
                     CreateCharacter(candidate, AvailableNames[Random.Range(0, AvailableNames.Length)], Random.Range(1990, 2001), new Vector2(10, -0.3f), candidate.name);
 
                     complete = true;
+
 
                 yield return null;
                 }
@@ -888,7 +930,7 @@ public class Manager : MonoBehaviour
             yield return StartCoroutine(P3_CandidatePresentationTime(candidate, candidateNumber));
 
         }
-        StartCoroutine(P2_CompileShadows());
+        StartCoroutine(P3_CompileShadows());
     }
    
     IEnumerator P3_CandidatePresentationTime(Person candidate, int candidateNumb)
@@ -930,6 +972,8 @@ public class Manager : MonoBehaviour
         OverlapCurrentShot(true);
 
         yield return StartCoroutine(P3_DistributePresentations(candidate));
+
+
         OverlapCurrentShot(false);
 
         SwapCamera(1, CinemachineBlendDefinition.Style.Cut);
@@ -944,16 +988,17 @@ public class Manager : MonoBehaviour
     {
         string[] presentationDialogue = new string[1];
 
-        if (HousesOnStage[0].GetComponent<HousePersonality>().HouseType == candidate.HouseType)
+        if (candidate.Priority== ShowCensus._CandidatesFeeling.BEST)
         {
             presentationDialogue = new string[]{ ConversationManager.Instance.P3_BestCandidatePresentation};
 
+
         }
-        else if (HousesOnStage[0].GetComponent<HousePersonality>().AntiHouseType == candidate.HouseType)
+        else if (candidate.Priority == ShowCensus._CandidatesFeeling.WORST)
         {
             presentationDialogue = new string[] { ConversationManager.Instance.P3_WorstCandidatePresentation };
         } 
-        else
+        else if (candidate.Priority == ShowCensus._CandidatesFeeling.NEUTRAL)
         {
             presentationDialogue = new string[]{ ConversationManager.Instance.P3_NeutralCandidatePresentation };   
         }
@@ -1010,7 +1055,7 @@ public class Manager : MonoBehaviour
     }
 
 
-      IEnumerator WaitingInput()
+    IEnumerator WaitingInput()
     {
         while (!Input.GetKeyDown(KeyCode.KeypadEnter) || TalkingDialogue)
         {
@@ -1037,23 +1082,10 @@ public class Manager : MonoBehaviour
         }
     }
 
-    //IEnumerator UpdateBubbleSpeech(GameObject bubble)
-    //{
-    //    for (int i = 0; i < Cams.Length; i++)
-    //    {
-    //        if (Cams[i] == CurrentCam)
-    //        {
-    //            bubble.transform.localPosition = CurrentShadow.transform.localPosition;
-    //            //bubble.transform.localEulerAngles = BubbleSpeechRot[i];
-                
-    //        }
-    //        yield return null;
-    //    }
-    //}
- 
+
   
   
-    IEnumerator P2_CompileShadows()
+    IEnumerator P3_CompileShadows()
     {
         OverlapCamPanel.SetActive(true);
 

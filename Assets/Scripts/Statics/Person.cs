@@ -5,6 +5,7 @@ using UnityEngine;
 public class Person
 {
     public ShowCensus._HouseType HouseType { get; set; }
+    public ShowCensus._CandidatesFeeling Priority { get; set; }
     private int _BirthYear;
     private int _ID;
     private bool _Candidate;

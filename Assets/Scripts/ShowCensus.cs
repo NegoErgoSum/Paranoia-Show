@@ -9,4 +9,11 @@ public class ShowCensus : MonoBehaviour
       MedievalHouse, StoneHouse, ImpressionistHouse, SurrealistHouse, WoodHouse
     };
     public _HouseType HouseType;
+
+
+    public enum _CandidatesFeeling
+    {
+        BEST, NEUTRAL, WORST
+    };
+    public _HouseType CandidatesFeeling;
 }

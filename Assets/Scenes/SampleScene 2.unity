@@ -9973,12 +9973,12 @@ MonoBehaviour:
   HouseOnStagePos: {x: 0, y: 0, z: 0}
   ShowmanGreetingHouseTime: 20
   ShowmanGreetingHousePos: {x: 5.3, y: 1.6, z: 0}
+  TalkingDelay: 0.1
   CandidatePresentationPos: {x: 42, y: 1, z: -28}
   BubbleSpawnPos: {x: 230, y: -150}
   CompileShadowsPos: {x: 48, y: 2, z: -23}
   CandidatePresentationTime: 50
   SpeechBubbleZoomMultiplier: 0.3
-  TalkingDelay: 0.25
   BubbleMaxScale: 20
   DistanceBetweenShadows: 5
   ComicDialogue: {fileID: 8093252570401100066, guid: c7bea90a15c75dc4882caf53a9df54bc,
@@ -10135,6 +10135,9 @@ MonoBehaviour:
     HouseReponse:
       HouseResponse: 
   P3_ShowmanPresentCandidates: []
+  P3_BestCandidatePresentation: 
+  P3_NeutralCandidatePresentation: 
+  P3_WorstCandidatePresentation: 
 --- !u!4 &536539162 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7356994402625327584, guid: dcf3259a294703a40866dfc6c9863c12,
@@ -19804,42 +19807,6 @@ MonoBehaviour:
   m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6e5e2c741e414724bb82e6b18576760a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Name: 
-  m_EditorClassIdentifier: 
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!20 &1051771587
