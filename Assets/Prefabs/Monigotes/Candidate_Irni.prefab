@@ -1,0 +1,87 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &8588375676182692843
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7749975427362576335, guid: f76462ee7aea1424e9b99a498422c2b1,
+        type: 3}
+      propertyPath: m_Name
+      value: Candidate_Irni
+      objectReference: {fileID: 0}
+    - target: {fileID: 3169498653379978463, guid: f76462ee7aea1424e9b99a498422c2b1,
+        type: 3}
+      propertyPath: m_Name
+      value: PersonajesMinimalistas_6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3169498653379978460, guid: f76462ee7aea1424e9b99a498422c2b1,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -5.2356787
+      objectReference: {fileID: 0}
+    - target: {fileID: 3169498653379978460, guid: f76462ee7aea1424e9b99a498422c2b1,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 3169498653379978460, guid: f76462ee7aea1424e9b99a498422c2b1,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -17.767254
+      objectReference: {fileID: 0}
+    - target: {fileID: 3169498653379978460, guid: f76462ee7aea1424e9b99a498422c2b1,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3169498653379978460, guid: f76462ee7aea1424e9b99a498422c2b1,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3169498653379978460, guid: f76462ee7aea1424e9b99a498422c2b1,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3169498653379978460, guid: f76462ee7aea1424e9b99a498422c2b1,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3169498653379978460, guid: f76462ee7aea1424e9b99a498422c2b1,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3169498653379978460, guid: f76462ee7aea1424e9b99a498422c2b1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3169498653379978460, guid: f76462ee7aea1424e9b99a498422c2b1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3169498653379978460, guid: f76462ee7aea1424e9b99a498422c2b1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3169498653379978461, guid: f76462ee7aea1424e9b99a498422c2b1,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300016, guid: 75fd248c65b0abd4f9e1af357a7859ab,
+        type: 3}
+    - target: {fileID: 7575497954264559239, guid: f76462ee7aea1424e9b99a498422c2b1,
+        type: 3}
+      propertyPath: PresentationDialogue.Array.data[0]
+      value: ddfa
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f76462ee7aea1424e9b99a498422c2b1, type: 3}

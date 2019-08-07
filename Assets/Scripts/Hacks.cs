@@ -43,12 +43,12 @@ public class Hacks : MonoBehaviour
             }
             if (Input.GetKeyDown(KeyCode.O))
             {
-                if (GameObject.Find("Brain").GetComponent<Manager>().OverlapShot.activeSelf)
+                if (GameObject.Find("Brain").GetComponent<Manager>().OverlapCamPanel.activeSelf)
                 {
                     GameObject.Find("Brain").GetComponent<Manager>().OverlapCurrentShot(false);
 
                 }
-                else if (!GameObject.Find("Brain").GetComponent<Manager>().OverlapShot.activeSelf)
+                else if (!GameObject.Find("Brain").GetComponent<Manager>().OverlapCamPanel.activeSelf)
                 {
                     GameObject.Find("Brain").GetComponent<Manager>().OverlapCurrentShot(true);
 
@@ -92,7 +92,7 @@ public class Hacks : MonoBehaviour
                 }
                 if (Input.GetKeyDown(KeyCode.Keypad2))
                 {
-                    GameObject.Find("Brain").GetComponent<Manager>().Phase2_CandidatesPresentation();
+                    GameObject.Find("Brain").GetComponent<Manager>().Phase3_CandidatesPresentation();
 
                 }
             }

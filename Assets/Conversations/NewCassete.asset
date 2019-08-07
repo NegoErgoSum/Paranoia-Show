@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b6c7706da5f7994db8431a5f7f0b743, type: 3}
+  m_Name: NewCassete
+  m_EditorClassIdentifier: 
+  ShowPresentation: {fileID: 11400000, guid: 381f867eb1645204b8de176bdf854e6d, type: 2}
+  ShowmanGreetsHouse: {fileID: 11400000, guid: 69e5c2f8f3993a844a77a6323c4afcbe, type: 2}
+  ShowmanGreetsCandidates: {fileID: 11400000, guid: 7b7e2ced02961744092a1915795f60f4,
+    type: 2}
+  CandidatesPresentation: {fileID: 11400000, guid: aefcee2fa02836a4ebfd26146cc76396,
+    type: 2}
+  HouseAskingCandidates: {fileID: 11400000, guid: 16e6a16cdbb42824cb768ca345c02727,
+    type: 2}

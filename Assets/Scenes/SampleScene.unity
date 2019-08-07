@@ -830,11 +830,12 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 07dbfcd1f679fb24586a9f2793077dab, type: 3}
   - {fileID: 21300000, guid: 7a5a081fd6256244b959de0c225792ec, type: 3}
   GameOverPos: {x: 0, y: -430.6, z: -173.8}
+  HousesOnStage: []
   ShowmanPrefab: {fileID: 4495230598631963443, guid: aec6c8e8ceeca674eb4428f2d71b56a0,
     type: 3}
   Houses:
   - {fileID: 3735857161923768086, guid: 38286bf3173b8ac47bd8b9f647d2cf68, type: 3}
-  HouseOnStage: {x: -8, y: 0}
+  HouseOnStagePos: {x: 0, y: 0}
   HouseEntryTime: 205
   CensusID: 
   Curtain: {fileID: 1671335608}
