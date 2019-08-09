@@ -163,7 +163,7 @@ public class SpotLightController : MonoBehaviour
                 yield return null;
             }
 
-            GameObject.Find("Brain").GetComponent<Manager>().EnterShowman(true);
+            GameObject.Find("Brain").GetComponent<Manager>().SP1_EnterShowman(true);
 
 
 

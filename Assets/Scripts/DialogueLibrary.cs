@@ -17,10 +17,4 @@ public class DialogueLibrary : MonoBehaviour
 
   
 
-    public void SetName()
-    {
-        HousePresentation1 = " Hoy tenemos con nosotros a " + gameObject.GetComponent<Manager>().HousesOnStage[0].GetComponent<HousePersonality>().Name+" que viene a buscar a su pareja ideal";
-        HousePresentations.Add(HousePresentation1);
-
-    }
 }

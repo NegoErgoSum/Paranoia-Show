@@ -16,8 +16,6 @@ public class ConversationManager : Singleton<ConversationManager>
     public ConversationTape CurrentCassette { get; set; }
     [Header("_______________")]
 
-    [TextArea(3,10)]
-    public string[] NextCheckedText;
 
 
     public ShowPresentation P1_ShowPresentation;
@@ -29,6 +27,10 @@ public class ConversationManager : Singleton<ConversationManager>
     public string P3_BestCandidatePresentation;
     public string P3_NeutralCandidatePresentation;
     public string P3_WorstCandidatePresentation;
+
+
+    public string[] NextCheckedText { get; set; }
+
 
     void Start()
     {
@@ -131,8 +133,37 @@ public class ConversationManager : Singleton<ConversationManager>
     //    }
 
 
+    public IEnumerator ReplaceDialogueKeywords(string[] dialogue)
+    {
+        List<string> dialogueLines = new List<string>();
+
+        foreach (string line in dialogue)
+        {
+
+            if (line.Contains("/houseName"))
+            {
+                string lineReplacement = line.Replace("/houseName", GameObject.Find("Brain").GetComponent<Manager>().HousesOnStage[0].GetComponent<HousePersonality>().Name);
+
+                dialogueLines.Add(lineReplacement);
 
 
+            }
+            else
+            {
+                dialogueLines.Add(line);
+                yield return null;
+
+            }
+
+
+            yield return null;
+
+        }
+        ConversationManager.Instance.NextCheckedText = dialogueLines.ToArray();
+
+        yield return dialogueLines.ToArray();
+
+}
 
     public class ConversationTape 
     {
@@ -296,6 +327,10 @@ public class ConversationManager : Singleton<ConversationManager>
 
     }
 }
+
+
+
+
 [System.Serializable]
 public class KeyWords
 {
