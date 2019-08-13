@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03085781881c1124e81ab81569cf0713, type: 3}
   m_Name: NewShowmanTape[ShowmanGreetsCandidates]
   m_EditorClassIdentifier: 
+  TextCommand: {}
   PresentantionDialogue:
-  - "Presentaci\xF3n candidatos 1\t"
-  - "Presentaci\xF3n candidatos 2"
+  - "\xA1Ahora abriremos el tel\xF3n para nuestros candidatos!"
+  - Muy bien, ahora demos la bienvenida a los candidatos.

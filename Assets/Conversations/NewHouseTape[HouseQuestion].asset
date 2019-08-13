@@ -12,14 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b76cb30f47ed1d846ae4ebeaa4d2f8e6, type: 3}
   m_Name: NewHouseTape[HouseQuestion]
   m_EditorClassIdentifier: 
+  TextCommand: {}
   HouseQuestion:
   - HouseType: 0
     PossibleQuestions:
-    - HouseAsking: Pregunta casa 1
+    - HouseAsking: "\xBFC\xF3mo definir\xEDas tu hogar perfecto?"
+      BestCandidateResponse: "Un lugar en el que guardar mi espada y escribir mis
+        poemas junto a tus preciosas y c\xE1lidas llamas."
+      NeutralCandidateResponse: "Si puedo dormir, beber y comer, es perfecto para
+        m\xED."
+      WorstCandidateResponse: Si tiene bar, es mi hogar. Y si no cruje, es perfecta.
+    - HouseAsking: "En caso de incendio, \xA1qu\xE9 es lo primero de m\xED que salvar\xEDas?"
       BestCandidateResponse: Mejor respuesta 1
       NeutralCandidateResponse: Pregunta neutra 1
       WorstCandidateResponse: Peor respuesta 1
-    - HouseAsking: Pregunta casa 2
-      BestCandidateResponse: Mejor respuesta 2
-      NeutralCandidateResponse: Pregunta neutra 2
-      WorstCandidateResponse: Peor respuesta 2

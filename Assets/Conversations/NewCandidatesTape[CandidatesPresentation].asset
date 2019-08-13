@@ -12,18 +12,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ffdecf7ea3bbc1438e3d1687561a680, type: 3}
   m_Name: NewCandidatesTape[CandidatesPresentation]
   m_EditorClassIdentifier: 
+  TextCommand: {}
   Feeling:
   - HouseType: 0
     BestCandidateDialogues:
-    - text: "Presentaci\xF3n  mejor candidato 1"
-      response: {fileID: 0}
-    - text: "Presentaci\xF3n  mejor candidato2"
-      response: {fileID: 0}
+    - text: "Hola, soy Andr\xE9s, y aqu\xED me ves. Antes de embarcar en nuestra traves\xEDa,
+        permiteme compartir un poco de poes\xEDa."
+      response: {fileID: 11400000, guid: 69e5c2f8f3993a844a77a6323c4afcbe, type: 2}
+    - text: "El c\xE1lido aroma de tus llamas apagando los llantos de mi ser, solo
+        eso como perfecci\xF3n puedo ver."
+      response: {fileID: 11400000, guid: 69e5c2f8f3993a844a77a6323c4afcbe, type: 2}
     NeutralCandidateDialogues:
-    - text: "presentaci\xF3n candidato neutro1"
-      response: {fileID: 0}
-    - text: "presentaci\xF3n candidato neutro2"
-      response: {fileID: 0}
+    - text: Soy Clorencio, y solo te pido tu silencio. Si tiene bar, tu casa ya es
+        mi hogar.
+      response: {fileID: 11400000, guid: 69e5c2f8f3993a844a77a6323c4afcbe, type: 2}
     WorstCandidateDialogues:
-    - text: "Peor presentaci\xF3n"
-      response: {fileID: 0}
+    - text: Yo soy Sancho, y con un verso me quede tan ancho.
+      response: {fileID: 11400000, guid: 69e5c2f8f3993a844a77a6323c4afcbe, type: 2}
+    - text: En cuanto a hogar, no me interesa la era, siempre y cuando tenga hoguera
+        donde quepa mi manguera.
+      response: {fileID: 11400000, guid: 69e5c2f8f3993a844a77a6323c4afcbe, type: 2}

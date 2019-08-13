@@ -12,13 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49059e2bf3f3e4548854c787891413d2, type: 3}
   m_Name: NewShowmanTape[ShowPresentation]
   m_EditorClassIdentifier: 
+  TextCommand: {}
   PossiblePresentations:
   - PresentantionDialogue:
-    - "Presentaci\xF3n 1\nL\xEDnea 1"
-    - "Presentaci\xF3n 1\nL\xEDnea 2"
+    - "\xA1Buenos dias! Bienvenidos una vez m\xE1s a The Big Show."
   - PresentantionDialogue:
-    - "Presentaci\xF3n 2\nL\xEDnea 1"
-    - "Presentaci\xF3n 2\nL\xEDnea 2"
-    - "Presentaci\xF3n 2\nL\xEDnea 3"
+    - Bienvenidos a The Big Show durante esta calida tarde!
   - PresentantionDialogue:
-    - "Presentaci\xF3n 3\nL\xEDnea 1"
+    - "\xA1Buenos noches! Bievenidos a esta noche tan acogedora a ver vuestro show
+      favorito, The Big Show."

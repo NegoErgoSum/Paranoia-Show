@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab01b8934bfce1d41aab404eeb84db57, type: 3}
   m_Name: NewShowmanTape[ShowmanGreetsHouse]
   m_EditorClassIdentifier: 
+  TextCommand: {}
   ShowmanGreetsHouse:
   - Type: 0
     ShowmanGreeting:
     - HousePresentations:
-      - "Presentaci\xF3n casa 1\nL\xEDnea 1"
-    - HousePresentations:
-      - "Presentaci\xF3n casa 2\nL\xEDnea 1"
-      - "Presentaci\xF3n casa 2\nL\xEDnea 2"
+      - "Hoy, se juzgar\xE1n a los pretendientes de /houseName . \xA1Vamos a conocerla!"
+      - "Un aut\xE9ntico placer para los ojos. \xA1Si no fuese contra las reglas,
+        hasta competir\xEDa por ella!"
     ShowmanAskHouse:
     - ShowmanAsk: Pregunta 1
       HouseReponse:
